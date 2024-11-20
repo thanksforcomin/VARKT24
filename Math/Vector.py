@@ -25,11 +25,11 @@ class Vector:
     def __mul__(self, value: float):
         return Vector(self.x * value, self.y * value)
 
+    def __neg__(self):
+        return self.__mul__(-1)
+
+    def __pos__(self):
+        return self
+
     def angle(self, vec) -> float:
         return acos((self.x * vec.x + self.y * vec.y) / (self.length() * vec.length()))
-
-
-v1 = Vector(1, 0)
-v2 = Vector(1, 6)
-
-print(v1.angle(v2))
