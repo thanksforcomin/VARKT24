@@ -3,15 +3,11 @@ from Constants import dt
 
 
 class Rocket(Vector):
-    def __init__(self, m: float, fuel: float, dm: float):
-        super(self, 0, 0)
+    def __init__(self, x: float, y: float, m: float, fuel: float, dm: float):
+        self.x = x
+        self.y = y
         self.m = m
         self.fuel = fuel
-        self.dm = dm
-
-    def __init__(self, x: float, y: float, m: float, dm: float):
-        super(self, x, y)
-        self.m = m
         self.dm = dm
 
     def update_mass(self) -> int:
