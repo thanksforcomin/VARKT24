@@ -8,7 +8,7 @@ class Vector:
         self.y = y
 
     def length(self) -> float:
-        return sqrt(self.x * self.x + self.y + self.y)
+        return sqrt(self.x * self.x + self.y * self.y)
 
     def __repr__(self):
         return f"({self.x}; {self.y})"
@@ -42,7 +42,7 @@ class Vector:
                 return pi / 2
             return atan(self.y / self.x)
         if self.length() == 0 or vec.length() == 0:
-            return 0
+            return pi / 2
         return acos((self.x * vec.x + self.y * vec.y) / (self.length() * vec.length()))
 
     def turn_by_angle(self, angle: float):

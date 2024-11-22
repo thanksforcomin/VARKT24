@@ -8,7 +8,7 @@ def angle(height: float) -> float:
         return 0
     if height > TURNING_END:
         return pi / 2
-    return (TURNING_END - height) / TURNING_END * pi / 2
+    return (TURNING_START - height) / TURNING_END * pi / 2
 
 
 def eccentricity(position: Vector, velocity: Vector) -> float:
