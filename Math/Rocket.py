@@ -1,7 +1,7 @@
 from Vector import Vector
 from Constants import *
-from Functions import pressure, angle, density, calculate_apogee
-from math import pi
+from Functions import pressure, angle, density, calculate_apocenter
+from math import pi, sqrt
 
 
 class NoStagesLeftException(Exception): ...
@@ -49,7 +49,7 @@ class Rocket(Vector):
         self.Force = Vector()
         self.is_engine_off = False
         self.acceleration = Vector()
-        self.velocity = Vector()
+        self.velocity = Vector(0, 0)
 
     def get_gravity(self) -> Vector:
         return -Vector(
@@ -57,7 +57,6 @@ class Rocket(Vector):
         ).turn_by_angle(self.angle())
 
     def get_drag(self) -> Vector:
-        return Vector()
         return -Vector(
             ROCKET_D
             * 0.008
@@ -102,7 +101,7 @@ class Rocket(Vector):
     def update_launch(self) -> float:
         if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
             self.stage_disattach()
-        if calculate_apogee(self, self.velocity) >= APOGEE:
+        if calculate_apocenter(self, self.velocity) >= APOCENTER + 1300:
             self.is_engine_off = True
 
         self.angle_to_radius = angle(self.length())

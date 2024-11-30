@@ -20,8 +20,9 @@ t = 0
 times_under_surface = 0
 print(rocket)
 prev = 0
+m = 0
 
-while APOGEE - rocket.length() > 1:
+while APOCENTER - rocket.length() > 10:
     if rocket.length() < KERBIN_RADIUS:
         times_under_surface += 1
     height = max(height, rocket.update_launch() - KERBIN_RADIUS)
@@ -29,20 +30,30 @@ while APOGEE - rocket.length() > 1:
         pos = (rocket.x, rocket.y)
     if rocket.stages[0].fuel_mass < 1:
         rocket.is_engine_off = True
-    if abs(int(t) - t) < 0.05 and False:
+    if rocket.velocity.length() < 15:
         print(
             int(t),
             # rocket,
             int(rocket.velocity.length()),
-            rocket,
+            rocket.velocity,
+            rocket.acceleration,
+            rocket.length(),
         )
+    m = max(rocket.velocity.length(), m)
 
     t += dt
     dv += rocket.get_thrust().length() / rocket.get_mass() * dt
     if times_under_surface == 5000:
         break
-print(
-    t, "Crashed" if times_under_surface == 5000 else "On orbit", rocket, height, pos, dv
-)
+
+print("Rocket got to apocenter: ", times_under_surface < 5000)
+print("Time:", round(t, 2))
+print("Position:", rocket)
+print("Height:", rocket.length() - KERBIN_RADIUS)
+print("Reached:", height)
+print("Stages: ", rocket.stages)
+print("Delta v spent:", round(dv, 2))
+print("Max speed:", m)
+print("Angle:", rocket.angle_to_radius)
 
 print("END")
