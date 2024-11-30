@@ -4,7 +4,7 @@ from Rocket import Rocket, Stage, NoStagesLeftException
 from math import pi
 from Functions import *
 
-height = KERBIN_RADIUS
+height = 0
 velocity = Vector(0, 0)
 acceleration = Vector(0, 0)
 stage1 = Stage(MASS_SOLID_1, MASS_FUEL_1, FUEL_USAGE_1, THRUST_EARTH_1, THRUST_VACUUM_1)
@@ -19,66 +19,12 @@ times_under_surface = 0
 print(rocket)
 prev = 0
 
-while (rocket.length() < APOGEE or prev < 2000) and times_under_surface < 5000:
-    if rocket.length() > APOGEE:
-        prev += 1
-    # Stage disattach when fuel is out
-    if rocket.stages[0].fuel_mass < 0.5:
-        print(t, rocket.stages, rocket, calculate_apogee(rocket, velocity))
-        try:
-            rocket.stage_disattach()
-        except NoStagesLeftException:
-            print(rocket, calculate_apogee(rocket, velocity), "Engines are gone :)")
-            break
-    Force = Vector()
-    R = Vector(
-        ROCKET_D
-        * 0.008
-        * rocket.get_mass()
-        * velocity.length() ** 2
-        * density(rocket.length() - KERBIN_RADIUS)
-        / 2,
-        0,
-    )
-    R.turn_by_angle(pi + velocity.angle())
-    Force += R
+while rocket.length() < APOGEE:
+    height = max(height, rocket.update_launch() - KERBIN_RADIUS)
+    if abs(int(t) - t) < 0.05:
+        print(int(t), rocket, rocket.length())
+    t += dt
 
-    Gravity = Vector(GRAVITY_PARAMETER * rocket.get_mass() / (rocket.length() ** 2), 0)
-    Gravity.turn_by_angle(rocket.angle() + pi)
-
-    Force += Gravity
-    if is_engine_on:
-        Force += rocket.get_thrust()
-
-    acceleration = Force / rocket.get_mass()
-    velocity += acceleration * dt
-    rocket.addVector(velocity * dt)
-    if is_engine_on:
-        res_of_update = rocket.update_mass()
-    if is_engine_on and calculate_apogee(rocket, velocity) >= APOGEE:
-        print(calculate_apogee(rocket, velocity))
-        is_engine_on = False
-
-    if rocket.length() < KERBIN_RADIUS:
-        if int(t / dt) % 100 == 0:
-            print(t, times_under_surface, rocket)
-        times_under_surface += 1
-    dv += acceleration.length() * dt
-
-    height = max(height, rocket.length())
-    # print(int(t), rocket, rocket.length(), is_engine_on, height)
-
-
-print(
-    prev,
-    times_under_surface,
-    t,
-    rocket,
-    velocity,
-    rocket.angle(velocity),
-    height - KERBIN_RADIUS,
-    rocket.length() - KERBIN_RADIUS,
-    dv,
-)
+print(t, height, rocket, rocket.angle(velocity))
 
 print("END")

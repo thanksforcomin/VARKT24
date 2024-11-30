@@ -6,7 +6,7 @@ from math import pi, sin, sqrt, e
 def angle(height: float) -> float:
     if height < TURNING_START or height > TURNING_END:
         return 0
-    return 0.002 * dt
+    return (pi / 2) * (height - TURNING_START) / (TURNING_END - TURNING_START)
 
 
 def eccentricity(position: Vector, velocity: Vector) -> float:

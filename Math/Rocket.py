@@ -1,6 +1,7 @@
 from Vector import Vector
-from Constants import dt, KERBIN_RADIUS
-from Functions import pressure, angle
+from Constants import *
+from Functions import pressure, angle, density, calculate_apogee
+from math import pi
 
 
 class NoStagesLeftException(Exception): ...
@@ -44,6 +45,37 @@ class Rocket(Vector):
         self.x = x
         self.y = y
         self.stages = stages
+        self.angle_to_radius = 0
+        self.Force = Vector()
+        self.is_engine_off = False
+        self.acceleration = Vector()
+        self.velocity = Vector()
+
+    def get_gravity(self) -> Vector:
+        return Vector(
+            GRAVITY_PARAMETER * self.get_mass() / (self.length() ** 2), 0
+        ).turn_by_angle(self.angle() + pi)
+
+    def get_drag(self) -> Vector:
+        return Vector(
+            ROCKET_D
+            * 0.008
+            * self.get_mass()
+            * self.velocity.length() ** 2
+            * density(self.length() - KERBIN_RADIUS)
+            / 2,
+            0,
+        ).turn_by_angle(pi + self.velocity.angle())
+
+    def get_thrust(self) -> Vector:
+        if self.stages[0].fuel_mass <= 0 or self.is_engine_off:
+            return Vector()
+        return Vector(
+            self.stages[0].thrust_vacuum
+            + (self.stages[0].thrust_earth - self.stages[0].thrust_vacuum)
+            * pressure(self.length() - KERBIN_RADIUS),
+            0,
+        ).turn_by_angle(self.angle_to_radius + self.angle())
 
     def add_stage(self, stage: Stage):
         self.stages.append(stage)
@@ -59,19 +91,23 @@ class Rocket(Vector):
             return -1
         return self.stages[0].use_fuel()
 
-    def addVector(self, v: Vector):
+    def add_vector(self, v: Vector):
         self.x += v.x
         self.y += v.y
 
     def get_mass(self) -> float:
         return sum(map(lambda x: x.get_mass(), self.stages))
 
-    def get_thrust(self) -> Vector:
-        if self.stages[0].fuel_mass <= 0:
-            return Vector(0, 0)
-        return Vector(
-            self.stages[0].thrust_vacuum
-            + (self.stages[0].thrust_earth - self.stages[0].thrust_vacuum)
-            * pressure(self.length() - KERBIN_RADIUS),
-            0,
-        ).turn_by_angle(self.angle() + angle(self.length()))
+    def update_launch(self) -> float:
+        if self.stages[0].fuel_mass < 0.5:
+            self.stage_disattach()
+        if calculate_apogee(self, self.velocity) >= APOGEE:
+            self.is_engine_off = True
+        self.angle_to_radius = angle(self.length())
+        self.Force = self.get_gravity() + self.get_drag() + self.get_thrust()
+        self.acceleration = self.Force / self.get_mass()
+        self.velocity += self.acceleration * dt
+        self.add_vector(self.velocity * dt)
+
+        self.update_mass()
+        return self.length()
