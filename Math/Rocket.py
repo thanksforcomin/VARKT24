@@ -57,7 +57,8 @@ class Rocket(Vector):
         ).turn_by_angle(self.angle() + pi)
 
     def get_drag(self) -> Vector:
-        return Vector(
+        return Vector()
+        return -Vector(
             ROCKET_D
             * 0.008
             * self.get_mass()
@@ -65,7 +66,7 @@ class Rocket(Vector):
             * density(self.length() - KERBIN_RADIUS)
             / 2,
             0,
-        ).turn_by_angle(pi + self.velocity.angle())
+        ).turn_by_angle(self.velocity.angle())
 
     def get_thrust(self) -> Vector:
         if self.stages[0].fuel_mass <= 0 or self.is_engine_off:
@@ -99,15 +100,17 @@ class Rocket(Vector):
         return sum(map(lambda x: x.get_mass(), self.stages))
 
     def update_launch(self) -> float:
-        if self.stages[0].fuel_mass < 0.5:
+        if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
             self.stage_disattach()
         if calculate_apogee(self, self.velocity) >= APOGEE:
+            # print("Engines are off")
             self.is_engine_off = True
+
         self.angle_to_radius = angle(self.length())
         self.Force = self.get_gravity() + self.get_drag() + self.get_thrust()
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt
         self.add_vector(self.velocity * dt)
-
-        self.update_mass()
+        if not self.is_engine_off:
+            self.update_mass()
         return self.length()

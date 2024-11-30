@@ -4,9 +4,11 @@ from math import pi, sin, sqrt, e
 
 
 def angle(height: float) -> float:
-    if height < TURNING_START or height > TURNING_END:
+    if height < TURNING_START:
         return 0
-    return (pi / 2) * (height - TURNING_START) / (TURNING_END - TURNING_START)
+    if height > TURNING_END:
+        return pi / 2
+    return (pi / 2) * (height - TURNING_START) / 1_000
 
 
 def eccentricity(position: Vector, velocity: Vector) -> float:
