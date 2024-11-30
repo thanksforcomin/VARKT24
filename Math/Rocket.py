@@ -52,9 +52,9 @@ class Rocket(Vector):
         self.velocity = Vector()
 
     def get_gravity(self) -> Vector:
-        return Vector(
+        return -Vector(
             GRAVITY_PARAMETER * self.get_mass() / (self.length() ** 2), 0
-        ).turn_by_angle(self.angle() + pi)
+        ).turn_by_angle(self.angle())
 
     def get_drag(self) -> Vector:
         return Vector()
@@ -103,7 +103,6 @@ class Rocket(Vector):
         if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
             self.stage_disattach()
         if calculate_apogee(self, self.velocity) >= APOGEE:
-            # print("Engines are off")
             self.is_engine_off = True
 
         self.angle_to_radius = angle(self.length())

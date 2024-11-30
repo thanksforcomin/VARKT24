@@ -18,7 +18,9 @@ class Vector:
     def __sub__(self, vec):
         return Vector(self.x - vec.x, self.y - vec.y)
 
-    def __mul__(self, value: float | int):
+    def __mul__(self, value):
+        if isinstance(value, Vector):
+            return self.x * value.x + self.y * value.y
         return Vector(self.x * value, self.y * value)
 
     def __truediv__(self, value: float | int):
@@ -34,6 +36,8 @@ class Vector:
         if vec == None:
             if abs(self.x) < 0.01:
                 return pi / 2 if self.y >= 0 else 3 * pi / 2
+            if self.x < 0:
+                return atan(self.y / self.x) + pi
             return atan(self.y / self.x)
         if self.length() == 0 or vec.length() == 0:
             return pi / 2
