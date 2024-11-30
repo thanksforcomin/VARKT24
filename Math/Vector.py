@@ -1,9 +1,8 @@
 from math import sqrt, acos, cos, sin, pi, atan
-from typing import overload
 
 
 class Vector:
-    def __init__(self, x: float, y: float):
+    def __init__(self, x: float = 0, y: float = 0):
         self.x = x
         self.y = y
 
@@ -31,19 +30,19 @@ class Vector:
     def __pos__(self):
         return self
 
-    def angle(self) -> float:
-        if self.x == 0:
-            return pi / 2
-        return atan(self.y / self.x)
-
     def angle(self, vec=None) -> float:
         if vec == None:
-            if self.x == 0:
-                return pi / 2
+            if abs(self.x) < 0.01:
+                return pi / 2 if self.y >= 0 else 3 * pi / 2
             return atan(self.y / self.x)
         if self.length() == 0 or vec.length() == 0:
             return pi / 2
-        return acos((self.x * vec.x + self.y * vec.y) / (self.length() * vec.length()))
+        cos_alpha = (self.x * vec.x + self.y * vec.y) / (self.length() * vec.length())
+        if cos_alpha > 1:
+            return 0
+        elif cos_alpha < -1:
+            return pi
+        return acos(cos_alpha)
 
     def turn_by_angle(self, angle: float):
         self.x, self.y = self.x * cos(angle) - self.y * sin(angle), self.x * sin(
