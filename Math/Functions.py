@@ -15,13 +15,19 @@ def calculate_eccentricity(position: Vector, velocity: Vector) -> float:
     angle = position.angle(velocity)
     h = position.length() * velocity.length() * sin(angle)
     epsilon = velocity.length() ** 2 / 2 - GRAVITY_PARAMETER / position.length()
-    return sqrt(1 + epsilon * h * h / (GRAVITY_PARAMETER**2))
+    return sqrt(1 + 2 * epsilon * h * h / (GRAVITY_PARAMETER**2))
 
 
 def calculate_apocenter(position: Vector, velocity: Vector) -> float:
     e = calculate_eccentricity(position=position, velocity=velocity)
     a_inverse = 2 / position.length() - velocity.length() ** 2 / GRAVITY_PARAMETER
     return (1 + e) / a_inverse
+
+
+def calculate_pericenter(position: Vector, velocity: Vector) -> float:
+    e = calculate_eccentricity(position=position, velocity=velocity)
+    a_inverse = 2 / position.length() - velocity.length() ** 2 / GRAVITY_PARAMETER
+    return (1 - e) / a_inverse
 
 
 def pressure(height: float):

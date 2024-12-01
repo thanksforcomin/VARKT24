@@ -101,11 +101,35 @@ class Rocket(Vector):
     def update_launch(self) -> float:
         if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
             self.stage_disattach()
-        if calculate_apocenter(self, self.velocity) >= APOCENTER + 1300:
+        if calculate_apocenter(self, self.velocity) >= APOCENTER:
             self.is_engine_off = True
 
         self.angle_to_radius = angle(self.length())
-        self.Force = self.get_gravity() + self.get_drag() + self.get_thrust()
+        self.Force = self.get_gravity() + self.get_thrust()
+        self.acceleration = self.Force / self.get_mass()
+        self.velocity += self.acceleration * dt
+        self.add_vector(self.velocity * dt)
+        if not self.is_engine_off:
+            self.update_mass()
+        return self.length()
+
+    def update_orbit_setup(self):
+        if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
+            self.stage_disattach()
+
+        self.Force = self.get_gravity() + self.get_thrust()
+        self.acceleration = self.Force / self.get_mass()
+        self.velocity += self.acceleration * dt
+        self.add_vector(self.velocity * dt)
+        if not self.is_engine_off:
+            self.update_mass()
+        return self.length()
+
+    def update_orbit(self):
+        if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
+            self.stage_disattach()
+
+        self.Force = self.get_gravity() + self.get_thrust()
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt
         self.add_vector(self.velocity * dt)
