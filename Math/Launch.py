@@ -5,34 +5,37 @@ from Functions import *
 
 
 def launch(angle_function, low, high):
+    f = open("log.txt", "w")
     height = 0
     stage1 = Stage(
-        MASS_SOLID_1, MASS_FUEL_1, FUEL_USAGE_1, THRUST_EARTH_1, THRUST_VACUUM_1
+        END_MASS_1, START_MASS_1, FUEL_USAGE_1, THRUST_EARTH_1, THRUST_VACUUM_1
     )
     stage2 = Stage(
-        MASS_SOLID_2, MASS_FUEL_2, FUEL_USAGE_2, THRUST_EARTH_2, THRUST_VACUUM_2
+        END_MASS_2, START_MASS_2, FUEL_USAGE_2, THRUST_EARTH_2, THRUST_VACUUM_2
     )
     # stage3 = Stage(MASS_SOLID_3, MASS_FUEL_3, FUEL_USAGE_3, THRUST_EARTH_3, THRUST_VACUUM_3)
-    rocket = Rocket(0, KERBIN_RADIUS, [stage1, stage2])
+    rocket = Rocket(0, KERBIN_RADIUS + 100, [stage1, stage2])
     rocket.set_angle_function(angle_function, low, high)
     dv = 0
     t = 0
     times_under_surface = 0
     m = 0
-
-    while APOCENTER - rocket.length() > 80:
+    f.write("-------------------------------\n")
+    while APOCENTER - rocket.length() > 2000:
+        if abs(int(t) - t) < 0.001:
+            f.write(
+                f"time={int(t)}) velocity={rocket.velocity.length()}; thrust={rocket.get_thrust().length()}; fuel={rocket.get_mass() - rocket.stages[0].end_mass}; height={rocket.length() - KERBIN_RADIUS}\n"
+            )
         if rocket.length() < KERBIN_RADIUS:
             times_under_surface += 1
         height = max(height, rocket.update_launch() - KERBIN_RADIUS)
-        if rocket.stages[0].fuel_mass < 1:
-            rocket.is_engine_off = True
         m = max(rocket.velocity.length(), m)
 
         t += dt
         dv += rocket.get_thrust().length() / rocket.get_mass() * dt
         if times_under_surface == 5000:
             break
-
+    f.write("-------------------------------\n")
     print("Rocket got to apocenter: ", times_under_surface < 5000)
     print("Time:", round(t, 2))
     print("Position:", rocket)
@@ -43,13 +46,15 @@ def launch(angle_function, low, high):
     print("Max speed:", m)
     print("Angle:", rocket.angle_to_radius)
     print(
-        "Angle function in apogee: ", rocket.angle_function(rocket.length(), low, high)
+        "Angle function in apogee: ",
+        rocket.angle_function(rocket.length(), low, high),
+        angle_function(660_000, 14500 + KERBIN_RADIUS, 40_000 + KERBIN_RADIUS),
     )
     print("Velocity: ", rocket.velocity.length())
 
+    if len(rocket.stages) > 1:
+        rocket.stage_disattach()
     rocket.is_engine_off = False
-    rocket.stage_disattach()
-
     rocket.angle_to_radius = -pi / 2
 
     if times_under_surface >= 5000:
@@ -57,9 +62,11 @@ def launch(angle_function, low, high):
 
     # while calculate_eccentricity(rocket, rocket.velocity) > 0.012:
     apocenter_current = rocket.length()
-    while (
-        sqrt(GRAVITY_PARAMETER / apocenter_current) - rocket.velocity.length() > 0.001
-    ):
+    while sqrt(GRAVITY_PARAMETER / APOCENTER) - rocket.velocity.length() > 0.001:
+        if abs(int(t) - t) < 0.001:
+            f.write(
+                f"time={int(t)}) velocity={rocket.velocity.length()}; thrust={rocket.get_thrust().length()}; fuel={rocket.get_mass() - rocket.stages[0].end_mass}; height={rocket.length() - KERBIN_RADIUS}\n"
+            )
         rocket.update_orbit_setup()
         t += dt
         dv += rocket.get_thrust().length() / rocket.get_mass() * dt
@@ -115,4 +122,7 @@ def calculate_best(
 
 
 if __name__ == "__main__":
-    print(launch(lambda x, y, z: 0, 14500 + KERBIN_RADIUS, 86500 + KERBIN_RADIUS))
+    print(
+        launch(angle_linear, 14500 + KERBIN_RADIUS, 40_000 + KERBIN_RADIUS),
+        angle_linear(660_000, 14500 + KERBIN_RADIUS, 40_000 + KERBIN_RADIUS),
+    )

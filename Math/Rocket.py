@@ -10,29 +10,17 @@ class NoStagesLeftException(Exception): ...
 class Stage:
     def __init__(
         self,
-        solid_mass: float,
-        fuel_mass: float,
+        end_mass: float,
+        start_mass: float,
         fuel_usage: float,
         thrust_earth: float,
         thrust_vacuum: float,
     ):
-        self.solid_mass = solid_mass
-        self.fuel_mass = fuel_mass
+        self.end_mass = end_mass
+        self.start_mass = start_mass
         self.fuel_usage = fuel_usage
         self.thrust_earth = thrust_earth
         self.thrust_vacuum = thrust_vacuum
-
-    def get_mass(self):
-        return self.solid_mass + self.fuel_mass
-
-    def use_fuel(self):
-        if self.fuel_mass <= 0:
-            return -1
-        self.fuel_mass -= self.fuel_usage * dt
-        return 0
-
-    def __repr__(self):
-        return f"(fuel={self.fuel_mass}; mass={self.fuel_mass + self.solid_mass}; thrust={self.thrust_earth})"
 
 
 class Rocket(Vector):
@@ -45,11 +33,18 @@ class Rocket(Vector):
         self.x = x
         self.y = y
         self.stages = stages
+        self.current_mass = stages[0].start_mass
         self.angle_to_radius = 0
         self.Force = Vector()
         self.is_engine_off = False
         self.acceleration = Vector()
         self.velocity = Vector(0, 0)
+
+    def use_fuel(self) -> int:
+        if self.is_engine_off or self.current_mass - self.stages[0].end_mass < 0.1:
+            return -1
+        self.current_mass -= self.stages[0].fuel_usage * dt
+        return 0
 
     def set_angle_function(self, angle_function, low: float, high: float):
         self.low = low
@@ -62,6 +57,8 @@ class Rocket(Vector):
         ).turn_by_angle(self.angle())
 
     def get_drag(self) -> Vector:
+        if self.length() > 20_000:
+            return Vector()
         return -Vector(
             ROCKET_D
             * 0.008
@@ -73,7 +70,7 @@ class Rocket(Vector):
         ).turn_by_angle(self.velocity.angle())
 
     def get_thrust(self) -> Vector:
-        if self.stages[0].fuel_mass <= 0 or self.is_engine_off:
+        if self.current_mass <= self.stages[0].end_mass or self.is_engine_off:
             return Vector()
         return Vector(
             self.stages[0].thrust_vacuum
@@ -88,59 +85,48 @@ class Rocket(Vector):
     def stage_disattach(self):
         if len(self.stages) > 1:
             self.stages.pop(0)
+            self.current_mass = self.stages[0].start_mass
         else:
             raise NoStagesLeftException
-
-    def update_mass(self) -> int:
-        if len(self.stages) == 0:
-            return -1
-        return self.stages[0].use_fuel()
 
     def add_vector(self, v: Vector):
         self.x += v.x
         self.y += v.y
 
     def get_mass(self) -> float:
-        return sum(map(lambda x: x.get_mass(), self.stages))
+        return self.current_mass
 
     def update_launch(self) -> float:
-        if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
-            self.stage_disattach()
-        if calculate_apocenter(self, self.velocity) >= APOCENTER + 1000:
+        if calculate_apocenter(self, self.velocity) >= APOCENTER:
             self.is_engine_off = True
-
-        if APOCENTER - self.length() < 1200:
-            self.is_engine_off = False
-
         self.angle_to_radius = self.angle_function(self.length(), self.low, self.high)
         self.Force = self.get_gravity() + self.get_thrust() + self.get_drag()
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt
         self.add_vector(self.velocity * dt)
-        if not self.is_engine_off:
-            self.update_mass()
+        res = self.use_fuel()
+        if res == -1 and not self.is_engine_off:
+            self.is_engine_off = True
+            self.stage_disattach()
         return self.length()
 
     def update_orbit_setup(self):
-        if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
-            self.stage_disattach()
-
         self.Force = self.get_gravity() + self.get_thrust()
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt
         self.add_vector(self.velocity * dt)
-        if not self.is_engine_off:
-            self.update_mass()
+        res = self.use_fuel()
+        if res == -1 and not self.is_engine_off:
+            self.is_engine_off = True
         return self.length()
 
     def update_orbit(self):
-        if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
-            self.stage_disattach()
 
         self.Force = self.get_gravity() + self.get_thrust()
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt
         self.add_vector(self.velocity * dt)
-        if not self.is_engine_off:
-            self.update_mass()
+        res = self.use_fuel()
+        if res == -1 and not self.is_engine_off:
+            self.stage_disattach()
         return self.length()
