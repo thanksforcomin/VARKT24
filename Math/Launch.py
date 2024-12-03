@@ -5,6 +5,7 @@ from Functions import *
 
 
 def launch(angle_function, low, high):
+    f = open("log.txt", "w")
     height = 0
     stage1 = Stage(
         MASS_SOLID_1, MASS_FUEL_1, FUEL_USAGE_1, THRUST_EARTH_1, THRUST_VACUUM_1
@@ -12,8 +13,11 @@ def launch(angle_function, low, high):
     stage2 = Stage(
         MASS_SOLID_2, MASS_FUEL_2, FUEL_USAGE_2, THRUST_EARTH_2, THRUST_VACUUM_2
     )
-    # stage3 = Stage(MASS_SOLID_3, MASS_FUEL_3, FUEL_USAGE_3, THRUST_EARTH_3, THRUST_VACUUM_3)
-    rocket = Rocket(0, KERBIN_RADIUS, [stage1, stage2])
+    stage3 = Stage(
+        MASS_SOLID_3, MASS_FUEL_3, FUEL_USAGE_3, THRUST_EARTH_3, THRUST_VACUUM_3
+    )
+    rocket = Rocket(0, KERBIN_RADIUS, [stage1, stage2, stage3])
+    print(rocket.stages, sum(map(lambda x: x.get_mass(), rocket.stages)))
     rocket.set_angle_function(angle_function, low, high)
     dv = 0
     t = 0
@@ -21,6 +25,10 @@ def launch(angle_function, low, high):
     m = 0
 
     while APOCENTER - rocket.length() > 80:
+        if abs(int(t) - t) < dt:
+            f.write(
+                f"time={int(t)}; height={int(rocket.length())}; velocity={int(rocket.velocity.length())}; h={8.314 * 10**3 * 250 / (29 * GRAVITY_PARAMETER / (rocket.length() + KERBIN_RADIUS) ** 2)}\n"
+            )
         if rocket.length() < KERBIN_RADIUS:
             times_under_surface += 1
         height = max(height, rocket.update_launch() - KERBIN_RADIUS)
@@ -32,7 +40,7 @@ def launch(angle_function, low, high):
         dv += rocket.get_thrust().length() / rocket.get_mass() * dt
         if times_under_surface == 5000:
             break
-
+    f.close()
     print("Rocket got to apocenter: ", times_under_surface < 5000)
     print("Time:", round(t, 2))
     print("Position:", rocket)
@@ -58,7 +66,8 @@ def launch(angle_function, low, high):
     # while calculate_eccentricity(rocket, rocket.velocity) > 0.012:
     apocenter_current = rocket.length()
     while (
-        sqrt(GRAVITY_PARAMETER / apocenter_current) - rocket.velocity.length() > 0.001
+        sqrt(GRAVITY_PARAMETER / apocenter_current) - rocket.velocity.length()
+        > 0.000000000001
     ):
         rocket.update_orbit_setup()
         t += dt
@@ -71,15 +80,10 @@ def launch(angle_function, low, high):
     print("Velocity: ", rocket.velocity.length())
     print("dv: ", dv)
 
-    return times_under_surface < 5000, t, rocket, dv
+    # return times_under_surface < 5000, t, rocket, dv
     while True:
         rocket.update_orbit()
-        print(
-            int(t),
-            int(rocket.length()),
-            calculate_eccentricity(rocket, rocket.velocity),
-            rocket.stages,
-        )
+
         t += dt
 
 
@@ -115,4 +119,4 @@ def calculate_best(
 
 
 if __name__ == "__main__":
-    print(launch(lambda x, y, z: 0, 14500 + KERBIN_RADIUS, 86500 + KERBIN_RADIUS))
+    print(launch(angle_elliptic, 10000 + KERBIN_RADIUS, 51000 + KERBIN_RADIUS))

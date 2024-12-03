@@ -48,7 +48,8 @@ def calculate_pericenter(position: Vector, velocity: Vector) -> float:
 
 
 def pressure(height: float):
-    return e ** (-height / H)
+    h = 8.314 * 10**3 * 250 / (29 * GRAVITY_PARAMETER / (height + KERBIN_RADIUS) ** 2)
+    return e ** (-height / 5000)
 
 
 def density(height: float):

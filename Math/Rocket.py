@@ -62,6 +62,8 @@ class Rocket(Vector):
         ).turn_by_angle(self.angle())
 
     def get_drag(self) -> Vector:
+        if self.length() > 70_000:
+            return Vector()
         return -Vector(
             ROCKET_D
             * 0.008

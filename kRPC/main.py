@@ -6,7 +6,7 @@ import logger as log
 
 conn = krpc.connect()
 vessel = conn.space_center.active_vessel
-vessel.name = "SOYUZ-7K-OK"
+vessel.name = "SOYUZ-7K-LOK"
 control = vessel.control
 auto_pilot = vessel.auto_pilot
 
@@ -60,7 +60,6 @@ pitch = conn.add_stream(getattr, vessel.flight(), "pitch")  # рысканье �
 
 logger = log.Logger()
 logger.create_log_file()
-print(logger.file)
 log_thread = threading.Thread(target=log.collect_data_and_log, args=(logger, vessel))
 log_thread.start()
 
