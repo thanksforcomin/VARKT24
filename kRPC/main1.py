@@ -14,7 +14,7 @@ vessel = space_center.active_vessel
 threading.Thread(target=stageMonitor.monitor, args=(vessel))
 
 # get to the orbit
-toOrbit.engage(vessel, space_center, conn, 0.5)
+toOrbit.engage(conn, 0.5)
 
 
 # mun transfer burn
