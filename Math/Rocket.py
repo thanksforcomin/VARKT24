@@ -1,6 +1,6 @@
 from Vector import Vector
 from Constants import *
-from Functions import pressure, angle, density, calculate_apocenter
+from Functions import pressure, density, calculate_apocenter
 from math import pi, sqrt
 
 
@@ -50,6 +50,11 @@ class Rocket(Vector):
         self.is_engine_off = False
         self.acceleration = Vector()
         self.velocity = Vector(0, 0)
+
+    def set_angle_function(self, angle_function, low: float, high: float):
+        self.low = low
+        self.high = high
+        self.angle_function = angle_function
 
     def get_gravity(self) -> Vector:
         return -Vector(
@@ -101,11 +106,14 @@ class Rocket(Vector):
     def update_launch(self) -> float:
         if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
             self.stage_disattach()
-        if calculate_apocenter(self, self.velocity) >= APOCENTER:
+        if calculate_apocenter(self, self.velocity) >= APOCENTER + 1000:
             self.is_engine_off = True
 
-        self.angle_to_radius = angle(self.length())
-        self.Force = self.get_gravity() + self.get_thrust()
+        if APOCENTER - self.length() < 1200:
+            self.is_engine_off = False
+
+        self.angle_to_radius = self.angle_function(self.length(), self.low, self.high)
+        self.Force = self.get_gravity() + self.get_thrust() + self.get_drag()
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt
         self.add_vector(self.velocity * dt)

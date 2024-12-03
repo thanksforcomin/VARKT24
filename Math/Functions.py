@@ -3,12 +3,29 @@ from Constants import *
 from math import pi, sin, sqrt, e, sqrt
 
 
-def angle(height: float) -> float:
-    if height < TURNING_START:
+def angle_linear(height: float, low: float, high: float) -> float:
+    if height < low:
         return 0
-    if height > TURNING_END:
-        return pi / 2
-    return -(pi / 2) * (height - TURNING_START) / (TURNING_END - TURNING_START)
+    if height > high:
+        return -pi / 2
+    return -(pi / 2) * (height - low) / (high - low)
+
+
+def angle_parabolic(height: float, low: float, high: float) -> float:
+    if height < low:
+        return 0
+    if height > high:
+        return -pi / 2
+    k = -pi / (2 * (high - low) ** 2)
+    return k * (height - low) ** 2
+
+
+def angle_elliptic(height: float, low: float, high: float) -> float:
+    if height < low:
+        return 0
+    if height > high:
+        return -pi / 2
+    return -pi / 2 * sqrt(1 - ((height - high) / (high - low)) ** 2)
 
 
 def calculate_eccentricity(position: Vector, velocity: Vector) -> float:
