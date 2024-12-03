@@ -1,14 +1,13 @@
 import json
 import time
 import datetime
-import krpc
 
 
 class Logger:
     def __init__(self):
         self.logging = True
         self.file_name = ""
-        self.file = ""
+        self.file = None
 
     def create_log_file(self):
         current_time = datetime.datetime.now().strftime("%d-%m-%Y-%H-%M")
@@ -16,8 +15,9 @@ class Logger:
         self.file = open(self.file_name, "a")
 
     def append_to_log_file(self, data):
-        json.dump(data, self.file)
-        self.file.write("\n")
+        if self.file:
+            json.dump(data, self.file)
+            self.file.write("\n")
 
     def stop_logging(self):
         self.logging = False

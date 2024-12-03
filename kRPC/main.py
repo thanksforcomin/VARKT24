@@ -60,7 +60,6 @@ pitch = conn.add_stream(getattr, vessel.flight(), "pitch")  # рысканье �
 
 logger = log.Logger()
 logger.create_log_file()
-print(logger.file)
 log_thread = threading.Thread(target=log.collect_data_and_log, args=(logger, vessel))
 log_thread.start()
 
