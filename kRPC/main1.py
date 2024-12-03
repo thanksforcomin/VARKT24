@@ -3,6 +3,7 @@ import threading
 import stageMonitor
 import toOrbit
 import munTransfer
+import orbitMun
 
 
 conn = krpc.connect()
@@ -25,3 +26,5 @@ time_to_warp = (
 space_center.warp_to(
     space_center.ut + time_to_warp - 60 * 5
 )  # 5 minutes before periapsis of mun encounter
+
+orbitMun.engage(conn)
