@@ -7,6 +7,8 @@ def engage(connection, ascentProfileConstant=1.25):
     space_center = connection.space_center
     vessel = space_center.active_vessel
 
+    vessel.control.activate_next_stage()
+
     vessel.control.rcs = True
     vessel.control.throttle = 1
 
