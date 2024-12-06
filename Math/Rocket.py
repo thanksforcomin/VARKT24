@@ -3,6 +3,7 @@ from Constants import *
 from Functions import pressure, density, calculate_apocenter
 from math import pi, sqrt
 from Satellite import Satellite
+from Center_of_gravity import Celestial
 
 
 class NoStagesLeftException(Exception): ...
@@ -37,11 +38,14 @@ class Stage:
 
 
 class Rocket(Vector):
+    MUN_DELTA_VECTOR = Vector(-11843727.359355858, 4389155.821897084)
+
     def __init__(
         self,
         x: float,
         y: float,
         Mun: Satellite,
+        center: Celestial,
         stages: list[Stage] = [],
     ):
         self.x = x
@@ -50,9 +54,18 @@ class Rocket(Vector):
         self.angle_to_radius = 0
         self.Force = Vector()
         self.is_engine_off = False
+        self.center = center
         self.acceleration = Vector()
         self.velocity = Vector(0, 0)
         self.Mun = Mun
+        self.MUN_DELTA_VECTOR = Vector(-11624900.392225746, 4319802.224199214)
+
+    def change_center_to_satellite(self):
+        d = self - self.Mun
+        self.center = Celestial(self.Mun.radius, self.Mun.mass, self.Mun.SOI)
+        self.x = d.x
+        self.y = d.y
+        self.angle_to_radius = pi
 
     def set_angle_function(self, angle_function, low: float, high: float):
         self.low = low
@@ -61,7 +74,7 @@ class Rocket(Vector):
 
     def get_lunar_gravity(self) -> Vector:
         d = self.Mun - self
-        if d.length() > self.SOI:
+        if d.length() > self.Mun.SOI:
             return Vector()
         return Vector(
             self.Mun.GRAVITY_PARAMETER * self.get_mass() / d.length() ** 2, 0
@@ -69,7 +82,7 @@ class Rocket(Vector):
 
     def get_gravity(self) -> Vector:
         return -Vector(
-            GRAVITY_PARAMETER * self.get_mass() / (self.length() ** 2), 0
+            self.center.GRAVITY_PARAMETER * self.get_mass() / (self.length() ** 2), 0
         ).turn_by_angle(self.angle())
 
     def get_drag(self) -> Vector:
@@ -128,7 +141,7 @@ class Rocket(Vector):
         self.Mun.update_position()
         if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
             self.stage_disattach()
-        if calculate_apocenter(self, self.velocity) >= APOCENTER + 1000:
+        if calculate_apocenter(self, self.velocity, self.center) >= APOCENTER + 1000:
             self.is_engine_off = True
 
         if APOCENTER - self.length() < 1200:
@@ -170,24 +183,29 @@ class Rocket(Vector):
         return self.length()
 
     def mun_transfer_check(self):
-        a = (self.length() + self.Mun.length() - 40_000) / 2
-        t = 2 * pi * sqrt(a**3 / GRAVITY_PARAMETER)
+        a = (self.length() + self.Mun.length()) / 2
+        t = 26739
         Mun = self.Mun.position_in(t)
-        pos = -self / self.length() * (self.Mun.length() - 40_000)
-        if (Mun - pos).length() < 50_000:
+        temp = Vector(self.MUN_DELTA_VECTOR.x, self.MUN_DELTA_VECTOR.y).turn_by_angle(
+            self.angle()
+        )
+        pos = self + temp
+        if (Mun - pos).length() < 35_000 + self.Mun.radius:
             self.is_engine_off = False
+            print(pos, pos.length())
             return True
         return False
 
     def mun_transfer(self):
-        self.Force = self.get_gravity() + self.get_thrust()
+        self.Force = self.get_gravity() + self.get_thrust() + self.get_lunar_gravity()
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt
         self.add_vector(self.velocity * dt)
         self.Mun.update_position()
         if (
             not self.is_engine_off
-            and calculate_apocenter(self, self.velocity) > self.Mun.length() - 40_000
+            and calculate_apocenter(self, self.velocity, self.center)
+            > self.Mun.length() - self.Mun.radius - 25_000
         ):
             self.is_engine_off = True
         if not self.is_engine_off:

@@ -1,8 +1,9 @@
 from Constants import *
 from Rocket import Rocket, Stage
-from math import pi
+from math import pi, cos
 from Functions import *
 from Satellite import Satellite
+from Center_of_gravity import Celestial
 
 
 def launch(angle_function, low, high):
@@ -18,7 +19,13 @@ def launch(angle_function, low, high):
     stage3 = Stage(
         MASS_SOLID_3, MASS_FUEL_3, FUEL_USAGE_3, THRUST_EARTH_3, THRUST_VACUUM_3
     )
-    rocket = Rocket(0, KERBIN_RADIUS, Mun, [stage1, stage2, stage3])
+    rocket = Rocket(
+        0,
+        KERBIN_RADIUS,
+        Mun,
+        Celestial(KERBIN_RADIUS, KERBIN_MASS, KERBIN_SOI),
+        [stage1, stage2, stage3],
+    )
     # print(rocket.stages, sum(map(lambda x: x.get_mass(), rocket.stages)))
     rocket.set_angle_function(angle_function, low, high)
     dv = 0
@@ -76,41 +83,76 @@ def launch(angle_function, low, high):
         dv += rocket.get_thrust().length() / rocket.get_mass() * dt
     rocket.is_engine_off = True
     """
-    print("Apocenter:", calculate_apocenter(rocket, rocket.velocity))
-    print("Pericenter:", calculate_pericenter(rocket, rocket.velocity))
-    print("Eccentricity: ", calculate_eccentricity(rocket, rocket.velocity))
+    print("Apocenter:", calculate_apocenter(rocket, rocket.velocity, rocket.center))
+    print("Pericenter:", calculate_pericenter(rocket, rocket.velocity, rocket.center))
+    print("Eccentricity: ", calculate_eccentricity(rocket, rocket.velocity, rocket.center))
     print("Velocity: ", rocket.velocity.length())
     print("dv: ", dv)
     """
     rocket.stage_disattach()
-    # return times_under_surface < 5000, t, rocket, dv
+    print("On orbit")
+
+    return times_under_surface < 5000, t, rocket, dv
+
+
+def mun_launch(is_on_orbit: bool, t: float, rocket: Rocket, dv: float):
+    if not is_on_orbit:
+        print("Didn't get to the orbit")
+        return is_on_orbit, t, rocket, dv
     while not rocket.mun_transfer_check():
         rocket.update_orbit()
         t += dt
 
-    print("Mun testing")
-    while True:
-        rocket.Mun.update_position()
-        if abs(int(t) - t) < dt:
-            print(int(t), rocket.Mun.length(), rocket.Mun)
-        t += dt
-    print("Launching"), t
+    current = Vector(rocket.x, rocket.y)
+    print("Launching", t, current.length(), current)
+    t1 = 0
+    rocket.is_engine_off = False
+
     while rocket.distance_to_mun() > 50_000:
         rocket.mun_transfer()
+        dv += rocket.get_thrust().length() / rocket.get_mass() * dt
         if abs(int(t) - t) < dt:
             print(
                 int(t),
-                rocket.stages,
+                int(t1),
+                rocket.length() > rocket.Mun.length(),
                 int(rocket.length()),
-                rocket.length() > 12_000_000,
-                calculate_eccentricity(rocket, rocket.velocity),
-                rocket.velocity.length(),
-                rocket.Mun,
-                rocket.Mun.length(),
+                int(rocket.velocity.length()),
+                int(rocket.distance_to_mun()),
             )
-        t += dt
+        if rocket.length() >= 12_000_000 - rocket.Mun.radius - 35_000:
+            print(
+                (rocket - current).turn_by_angle(-current.angle()),
+                current.angle(),
+                rocket.distance_to_mun(),
+            )
+            break
 
+        t += dt
+        t1 += dt
+        dv += rocket.get_thrust().length() / rocket.get_mass()
     print("Got to the Mun")
+    return is_on_orbit, t, rocket, dv
+
+
+def mun_orbit(is_on_orbit: bool, t: float, rocket: Rocket, dv: float):
+    if not is_on_orbit:
+        return is_on_orbit, t, rocket, dv
+    rocket.change_center_to_satellite()
+    print(rocket, rocket.velocity, rocket.acceleration)
+    rocket.is_engine_off = False
+    print(calculate_pericenter(rocket, rocket.velocity, rocket.center))
+    print(calculate_apocenter(rocket, rocket.velocity, rocket.center))
+    while rocket.length() > rocket.center.radius:
+        rocket.update_orbit()
+        t += dt
+        if abs(int(t) - t) < dt:
+            print(
+                int(t),
+                rocket.length(),
+                rocket.velocity.length(),
+            )
+    return is_on_orbit, t, rocket, dv
 
 
 def calculate_best(
@@ -138,10 +180,10 @@ def calculate_best(
                 best_end = end
                 r = rocket
         out.write(
-            f"{start})min_dv = {best_dv}; low = {best_start}; high = {best_end}; e={calculate_eccentricity(r, r.velocity)}\n"
+            f"{start})min_dv = {best_dv}; low = {best_start}; high = {best_end}; e={calculate_eccentricity(r, r.velocity, r.center)}\n"
         )
         print(
-            f"{start})min_dv = {best_dv}; low = {best_start}; high = {best_end}; e={calculate_eccentricity(r, r.velocity)}\n"
+            f"{start})min_dv = {best_dv}; low = {best_start}; high = {best_end}; e={calculate_eccentricity(r, r.velocity, r.center)}\n"
         )
 
     print("Out")
@@ -153,7 +195,9 @@ def calculate_best(
 
 
 if __name__ == "__main__":
-    is_on_orbit, t, r, dv = launch(
-        angle_elliptic, 10000 + KERBIN_RADIUS, 51000 + KERBIN_RADIUS
+    is_on_orbit, t, r, dv = mun_orbit(
+        *mun_launch(
+            *launch(angle_elliptic, 10000 + KERBIN_RADIUS, 51000 + KERBIN_RADIUS)
+        )
     )
-    print(dv, calculate_eccentricity(r, r.velocity))
+    print(is_on_orbit)
