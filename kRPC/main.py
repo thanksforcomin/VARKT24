@@ -6,7 +6,7 @@ import logger as log
 
 conn = krpc.connect()
 vessel = conn.space_center.active_vessel
-vessel.name = "SOYUZ-7K-OK"
+vessel.name = "SOYUZ-7K-LOK"
 control = vessel.control
 auto_pilot = vessel.auto_pilot
 
