@@ -1,5 +1,17 @@
 import krpc
+from math import sqrt
 from time import sleep
+
+
+TARGET_APOAPSIS = 75000
+
+
+def angle_elliptic(height: float, low: float, high: float) -> float:
+    if height < low:
+        return 0
+    if height > high:
+        return -90
+    return -90 * sqrt(1 - ((height - high) / (high - low)) ** 2)
 
 
 def engage(connection, ascentProfileConstant=1.25):
@@ -7,23 +19,26 @@ def engage(connection, ascentProfileConstant=1.25):
     space_center = connection.space_center
     vessel = space_center.active_vessel
 
+    vessel.control.rcs = True
+    vessel.control.sas = True
+    vessel.control.throttle = 0.76
+
     vessel.control.activate_next_stage()
 
-    vessel.control.rcs = True
-    vessel.control.throttle = 1
-
     apoapsisStream = connection.add_stream(getattr, vessel.orbit, "apoapsis_altitude")
+    altitude = connection.add_stream(getattr, vessel.flight(), "mean_altitude")
 
     vessel.auto_pilot.engage()
     vessel.auto_pilot.target_heading = 90
+    vessel.auto_pilot.target_pitch = 90
+
+    while altitude() < 10000:
+        sleep(0.1)
 
     # Get to proper apoapsis/complete gravity turn
-    while apoapsisStream() < 75000:
+    while apoapsisStream() < TARGET_APOAPSIS:
         # Calculate the target pitch
-        targetPitch = 90 - (
-            (90 / (75000**ascentProfileConstant))
-            * (apoapsisStream() ** ascentProfileConstant)
-        )
+        targetPitch = 90 + angle_elliptic(altitude(), 10000, 51000)
         print("Current target pitch:", targetPitch, "with apoapsis", apoapsisStream())
 
         # Set autopilot target pitch
@@ -45,10 +60,12 @@ def engage(connection, ascentProfileConstant=1.25):
 
         sleep(0.5)
 
-    vessel.control.throttle = 0.5
+    vessel.control.activate_next_stage()
+
+    vessel.control.throttle = 1
     lastUT = space_center.ut
     lastTimeToAp = timeToApoapsisStream()
-    while periapsisStream() < 70500:
+    while periapsisStream() < TARGET_APOAPSIS:
         sleep(0.2)
         timeToAp = timeToApoapsisStream()
         deltaTimeToAp = (timeToAp - lastTimeToAp) / (space_center.ut - lastUT)

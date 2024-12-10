@@ -8,10 +8,9 @@ def engage(connection):
     vessel = space_center.active_vessel
 
     vessel.control.rcs = True
-    fairings = vessel.parts.fairings
-    for fairing in fairings:
-        fairing.jettison()
     vessel.control.antennas = True  # Deploy antennas
+
+    vessel.control.activate_next_stage()
 
     destSemiMajor = space_center.bodies["Mun"].orbit.semi_major_axis
     hohmannSemiMajor = destSemiMajor / 2
