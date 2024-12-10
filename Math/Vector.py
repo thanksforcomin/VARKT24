@@ -1,4 +1,5 @@
 from math import sqrt, acos, cos, sin, pi, atan
+from typing import Self
 
 
 class Vector:
@@ -12,24 +13,24 @@ class Vector:
     def __repr__(self):
         return f"({self.x}; {self.y})"
 
-    def __add__(self, vec):
+    def __add__(self, vec) -> Self:
         return Vector(self.x + vec.x, self.y + vec.y)
 
-    def __sub__(self, vec):
+    def __sub__(self, vec) -> Self:
         return Vector(self.x - vec.x, self.y - vec.y)
 
-    def __mul__(self, value):
+    def __mul__(self, value: Self | int | float) -> Self:
         if isinstance(value, Vector):
             return self.x * value.x + self.y * value.y
         return Vector(self.x * value, self.y * value)
 
-    def __truediv__(self, value: float | int):
+    def __truediv__(self, value: float | int) -> Self:
         return self.__mul__(1 / value)
 
-    def __neg__(self):
+    def __neg__(self) -> Self:
         return self.__mul__(-1)
 
-    def __pos__(self):
+    def __pos__(self) -> Self:
         return self
 
     def angle(self, vec=None) -> float:
