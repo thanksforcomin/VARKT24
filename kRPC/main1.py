@@ -12,8 +12,8 @@ vessel = space_center.active_vessel
 
 
 # set up the stage monitor
-stage_monitor = threading.Thread(target=stageMonitor.monitor, args=(vessel,))
-stage_monitor.start()
+# stage_monitor = threading.Thread(target=stageMonitor.monitor, args=(vessel,))
+# stage_monitor.start()
 
 # get to the orbit
 toOrbit.engage(conn, 0.5)

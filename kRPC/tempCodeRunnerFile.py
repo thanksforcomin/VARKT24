@@ -1,1 +1,1 @@
-SOYUZ
+stage_monitor.start()
