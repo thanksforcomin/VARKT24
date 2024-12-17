@@ -10,6 +10,8 @@ def engage(connection):
     vessel.control.rcs = True
     vessel.control.antennas = True  # Deploy antennas
 
+    vessel.control.throttle = 0
+    sleep(1)
     vessel.control.activate_next_stage()
 
     destSemiMajor = space_center.bodies["Mun"].orbit.semi_major_axis
@@ -97,6 +99,11 @@ def engage(connection):
         actualDeltaV = (GM * ((2 / r) - (1 / a))) ** (1 / 2) - initialV
         print("DeltaV so far: ", actualDeltaV, "out of needed", deltaV)
     vessel.control.throttle = 0
+
+    solar_panels = vessel.parts.solar_panels
+    for sp in solar_panels:
+        sp.deployed = True
+
     vessel.auto_pilot.disengage()
 
     print("We should have a mun encounter!")

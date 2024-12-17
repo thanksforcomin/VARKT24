@@ -2,6 +2,8 @@ import json
 import time
 import datetime
 
+DEFAULT_FILE_NAME = "kRPC/Logs/{}-{}.json"
+
 
 class Logger:
     def __init__(self):
@@ -9,9 +11,9 @@ class Logger:
         self.file_name = ""
         self.file = None
 
-    def create_log_file(self):
+    def create_log_file(self, file_name):
         current_time = datetime.datetime.now().strftime("%d-%m-%Y-%H-%M")
-        self.file_name = f"kRPC/Logs/{current_time}.json"
+        self.file_name = DEFAULT_FILE_NAME.format(file_name, current_time)
         self.file = open(self.file_name, "a")
 
     def append_to_log_file(self, data):
@@ -24,21 +26,24 @@ class Logger:
 
 
 def collect_data_and_log(logger: Logger, vessel):
+    Sun = vessel.orbit.body.orbit.body
+    Kerbin = Sun.satellites[2]
+    KerbinRf = Kerbin.reference_frame
     while (
         vessel.situation.name != "splashed"
         and vessel.situation.name != "landed"
         and logger.logging
     ):
-
-        # Считываиние данных
-        velocity = vessel.flight(vessel.orbit.body.reference_frame).velocity
-        altitude = vessel.flight().mean_altitude
-        acceleration = vessel.flight().g_force
+        pos = vessel.position(KerbinRf)
+        # velocity = vessel.flight(vessel.orbit.body.reference_frame).velocity
+        # altitude = vessel.flight().mean_altitude
+        # acceleration = vessel.flight().g_force
 
         data = {
-            "Velocity": velocity,
-            "Acceleration": acceleration,
-            "Altitude": altitude,
+            "pos": pos,
+            # "Velocity": velocity,
+            # "Acceleration": acceleration,
+            # "Altitude": altitude,
         }
 
         # Вносим данные

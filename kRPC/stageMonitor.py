@@ -1,10 +1,12 @@
 import krpc
+import threading
 from time import sleep
 
 
 def monitor(vessel):
     sleep(3)
-    while True:
+    t = threading.currentThread()
+    while getattr(t, "do_run", True):
         resources = vessel.resources_in_decouple_stage(
             vessel.control.current_stage - 1, False
         )

@@ -39,7 +39,7 @@ def engage(connection: krpc.Client, ascentProfileConstant=1.25):
     while apoapsisStream() < TARGET_APOAPSIS:
         print(vessel.auto_pilot.sas)
         # Calculate the target pitch
-        targetPitch = 90 + angle_linear(altitude(), 10000, 51000)
+        targetPitch = 90 + angle_linear(altitude(), 2000, 50000)
         print("Current target pitch:", targetPitch, "with apoapsis", apoapsisStream())
 
         # Set autopilot target pitch
@@ -48,7 +48,6 @@ def engage(connection: krpc.Client, ascentProfileConstant=1.25):
         sleep(0.1)
 
     vessel.control.throttle = 0
-    sleep(1)
     timeToApoapsisStream = connection.add_stream(
         getattr, vessel.orbit, "time_to_apoapsis"
     )
@@ -65,11 +64,12 @@ def engage(connection: krpc.Client, ascentProfileConstant=1.25):
     node = vessel.control.add_node(ut() + timeToApoapsisStream(), prograde=delta_v)
     vessel.auto_pilot.reference_frame = node.reference_frame
     vessel.auto_pilot.target_direction = (0,1,0)
-    vessel.control.throttle = 0.2
+    # vessel.control.throttle = 0.2
     print(vessel.auto_pilot.reference_frame)
     print(vessel.auto_pilot.target_direction)
     print(node.reference_frame)
-    vessel.auto_pilot.wait()
+    sleep(1)
+    vessel.control.activate_next_stage()
     # Calculate burn time (using rocket equation)
     F = vessel.available_thrust
     Isp = vessel.specific_impulse * 9.82
@@ -78,19 +78,18 @@ def engage(connection: krpc.Client, ascentProfileConstant=1.25):
     flow_rate = F / Isp
     burn_time = (m0 - m1) / flow_rate   
     vessel.control.throttle = 0
-    sleep(1)
-    vessel.control.activate_next_stage()
     print(burn_time)
     # Now, wait and perform circularization burn
-    while node.time_to > burn_time/2:
+    while node.time_to - 20 > burn_time/2:
         print("Drifting to apoapsis.....")
         sleep(0.5)
 
     vessel.control.throttle = 1
     lastUT = ut()
     lastTimeToAp = timeToApoapsisStream()
+    eps = 20000
     #Circulazation burn
-    while node.remaining_delta_v > 30:
+    while abs(periapsisStream() - apoapsisStream()) > eps:
         sleep(0.2)
         print("Remaining delta V:", node.remaining_delta_v)
         liquid_fuel = vessel.resources.amount("LiquidFuel")
@@ -100,19 +99,25 @@ def engage(connection: krpc.Client, ascentProfileConstant=1.25):
         print("Estimated change in time to apoapsis per second:", deltaTimeToAp)
 
         # Adjust throttle according to the current deltaTimeToAp
-        # if deltaTimeToAp < -0.3:
-        #     vessel.control.throttle += 0.03
-        # elif deltaTimeToAp < -0.1:
-        #     vessel.control.throttle += 0.01
+        #if deltaTimeToAp < -0.3:
+        #    vessel.control.throttle += 0.03
+        #elif deltaTimeToAp < -0.1:
+        #    vessel.control.throttle += 0.01
 
-        # if deltaTimeToAp > 0.2:
-        #     vessel.control.throttle -= 0.03
-        # elif deltaTimeToAp > 0:
-        #     vessel.control.throttle -= 0.01
+        #if deltaTimeToAp > 0.2:
+        #    vessel.control.throttle -= 0.03
+        #elif deltaTimeToAp > 0:
+        #    vessel.control.throttle -= 0.01
 
         lastTimeToAp = timeToApoapsisStream()
         lastUT = ut()
     node.remove()
+    vessel.auto_pilot.reference_frame = vessel.surface_velocity_reference_frame
+    vessel.auto_pilot.target_direction = (0,1,0)
+    eps = 1000
+    vessel.control.throttle = 0.2
+    while abs(periapsisStream() - apoapsisStream()) > eps:
+        sleep(0.2)
     vessel.control.throttle = 0
     print("Apoapsis: ", apoapsisStream())
     print("Periapsis: ", periapsisStream())
