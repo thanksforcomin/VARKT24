@@ -1,10 +1,21 @@
-import typing
+def result_accumulator(func):
+    memory = []
 
-
-def result_accumulator(func: typing.Callable) -> typing.Callable:
-    l1 = []
-
-    def wrapper(*args, **kwargs):
-        func()
+    def wrapper(*args, method="accumulate"):
+        nonlocal memory
+        memory.append(func(*args))
+        if method == "drop":
+            temp = memory.copy()
+            memory = []
+            return temp
 
     return wrapper
+
+
+@result_accumulator
+def sum(a, b):
+    return a + b
+
+
+print(sum(5, 6, method="acc"))
+print(sum(7, 8, method="drop"))

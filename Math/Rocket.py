@@ -133,8 +133,7 @@ class Rocket(Vector):
                 * self.throttle
             )
         return (
-            -self.throttle
-            * Vector(
+            -Vector(
                 self.stages[0].thrust_vacuum
                 + (self.stages[0].thrust_earth - self.stages[0].thrust_vacuum)
                 * pressure(self.length() - KERBIN_RADIUS),

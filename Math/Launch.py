@@ -14,8 +14,8 @@ def launch(angle_function, low, high):
         MASS_SOLID_1,
         MASS_FUEL_1,
         FUEL_USAGE_1,
-        THRUST_EARTH_1 * 0.76,
-        THRUST_VACUUM_1 * 0.76,
+        THRUST_EARTH_1,
+        THRUST_VACUUM_1,
     )
     stage2 = Stage(
         MASS_SOLID_2, MASS_FUEL_2, FUEL_USAGE_2, THRUST_EARTH_2, THRUST_VACUUM_2
@@ -57,7 +57,7 @@ def launch(angle_function, low, high):
         if times_under_surface == 5000:
             break
     f.close()
-
+    """
     print("Rocket got to apocenter: ", times_under_surface < 5000)
     print("Time:", round(t, 2))
     print("Position:", rocket)
@@ -71,7 +71,7 @@ def launch(angle_function, low, high):
         "Angle function in apogee: ", rocket.angle_function(rocket.length(), low, high)
     )
     print("Velocity: ", rocket.velocity.length())
-
+    """
     rocket.is_engine_off = False
     rocket.stage_disattach()
 
@@ -83,13 +83,14 @@ def launch(angle_function, low, high):
     # while calculate_eccentricity(rocket, rocket.velocity) > 0.012:
     apocenter_current = rocket.length()
     while (
-        sqrt(GRAVITY_PARAMETER / apocenter_current) - rocket.velocity.length() > 0.001
+        calculate_pericenter(rocket, rocket.velocity, rocket.center)
+        < 70_000 + rocket.center.radius
     ):
         rocket.update_orbit_setup()
         t += dt
         dv += rocket.get_thrust().length() / rocket.get_mass() * dt
     rocket.is_engine_off = True
-
+    """
     print("Apocenter:", calculate_apocenter(rocket, rocket.velocity, rocket.center))
     print("Pericenter:", calculate_pericenter(rocket, rocket.velocity, rocket.center))
     print(
@@ -97,9 +98,9 @@ def launch(angle_function, low, high):
     )
     print("Velocity: ", rocket.velocity.length())
     print("dv: ", dv)
-
+    """
     rocket.stage_disattach()
-    print("On orbit")
+    # print("On orbit")
 
     return times_under_surface < 5000, t, rocket, dv
 
@@ -236,6 +237,8 @@ def calculate_best(
                 best_start = start
                 best_end = end
                 r = rocket
+        if not r.center:
+            continue
         out.write(
             f"{start})min_dv = {best_dv}; low = {best_start}; high = {best_end}; e={calculate_eccentricity(r, r.velocity, r.center)}\n"
         )
