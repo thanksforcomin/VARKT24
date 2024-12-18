@@ -18,7 +18,7 @@ def angle_parabolic(height: float, low: float, high: float) -> float:
     if height > high:
         return -pi / 2
     k = -pi / (2 * (high - low) ** 2)
-    return k * (height - low) ** 2
+    return k * (height - high) ** 2 - pi / 2
 
 
 def angle_elliptic(height: float, low: float, high: float) -> float:
@@ -26,7 +26,7 @@ def angle_elliptic(height: float, low: float, high: float) -> float:
         return 0
     if height > high:
         return -pi / 2
-    return -pi / 2 * sqrt(1 - ((height - high) / (high - low)) ** 2)
+    return -pi / 2 + pi / 2 * sqrt(1 - ((height - low) / (high - low)) ** 2)
 
 
 def calculate_eccentricity(
@@ -38,28 +38,39 @@ def calculate_eccentricity(
     return sqrt(1 + 2 * epsilon * h * h / (center.GRAVITY_PARAMETER**2))
 
 
-def calculate_apocenter(position: Vector, velocity: Vector, center: Celestial) -> float:
-    e = calculate_eccentricity(position, velocity, center)
-    a_inverse = (
+def calculate_semi_major_axis(position: Vector, velocity: Vector, center: Celestial):
+    return 1 / (
         2 / position.length() - velocity.length() ** 2 / center.GRAVITY_PARAMETER
     )
-    return (1 + e) / a_inverse
+
+
+def calculate_apocenter(position: Vector, velocity: Vector, center: Celestial) -> float:
+    e = calculate_eccentricity(position, velocity, center)
+    return (1 + e) * calculate_semi_major_axis(position, velocity, center)
 
 
 def calculate_pericenter(
     position: Vector, velocity: Vector, center: Celestial
 ) -> float:
     e = calculate_eccentricity(position, velocity, center)
-    a_inverse = (
-        2 / position.length() - velocity.length() ** 2 / center.GRAVITY_PARAMETER
-    )
-    return (1 - e) / a_inverse
+    return (1 - e) * calculate_semi_major_axis(position, velocity, center)
+
+
+def calculate_velocity_at_periapsis(
+    position: Vector, velocity: Vector, center: Celestial
+):
+    peri = calculate_pericenter(position, velocity, center)
+    a = calculate_semi_major_axis(position, velocity, center)
+    return sqrt(center.GRAVITY_PARAMETER * (2 / peri - 1 / a))
 
 
 def pressure(height: float):
-    h = 8.314 * 10**3 * 250 / (29 * GRAVITY_PARAMETER / (height + KERBIN_RADIUS) ** 2)
     return e ** (-height / 5600)
 
 
 def density(height: float):
     return DENSITY_TO_PRESSURE_RATIO * pressure(height)
+
+
+def cd(height: float):
+    return 0

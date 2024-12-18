@@ -1,6 +1,6 @@
 from Vector import Vector
 from Constants import *
-from Functions import pressure, density, calculate_apocenter
+from Functions import pressure, density, calculate_apocenter, cd
 from math import pi, sqrt
 from Satellite import Satellite
 from Center_of_gravity import Celestial
@@ -27,10 +27,10 @@ class Stage:
     def get_mass(self):
         return self.solid_mass + self.fuel_mass
 
-    def use_fuel(self):
+    def use_fuel(self, throttle: float):
         if self.fuel_mass <= 0:
             return -1
-        self.fuel_mass -= self.fuel_usage * dt
+        self.fuel_mass -= self.fuel_usage * dt * throttle
         return 0
 
     def __repr__(self):
@@ -87,8 +87,10 @@ class Rocket(Vector):
         ).turn_by_angle(self.angle())
 
     def get_drag(self) -> Vector:
-        if self.length() > 70_000:
+
+        if self.length() > 70_000 + self.center.radius:
             return Vector()
+
         return -Vector(
             ROCKET_D
             * 0.008
@@ -102,7 +104,7 @@ class Rocket(Vector):
     def get_thrust(self) -> Vector:
         if self.stages[0].fuel_mass <= 0 or self.is_engine_off:
             return Vector()
-        if self.length() > 70_000:
+        if self.length() > 70_000 + self.center.radius:
             return (
                 Vector(
                     self.stages[0].thrust_vacuum,
@@ -111,8 +113,7 @@ class Rocket(Vector):
                 * self.throttle
             )
         return (
-            self.throttle
-            * Vector(
+            Vector(
                 self.stages[0].thrust_vacuum
                 + (self.stages[0].thrust_earth - self.stages[0].thrust_vacuum)
                 * pressure(self.length() - KERBIN_RADIUS),
@@ -121,12 +122,12 @@ class Rocket(Vector):
             * self.throttle
         )
 
-    def get_thrust_opposing_velocity(self) -> Vector:
+    def get_thrust_velocity(self) -> Vector:
         if self.stages[0].fuel_mass <= 0 or self.is_engine_off:
             return Vector()
-        if self.length() > 70_000:
+        if self.length() > 70_000 + self.center.radius:
             return (
-                -Vector(
+                Vector(
                     self.stages[0].thrust_vacuum,
                     0,
                 ).turn_by_angle(self.velocity.angle())
@@ -141,6 +142,9 @@ class Rocket(Vector):
             ).turn_by_angle(self.velocity.angle())
             * self.throttle
         )
+
+    def get_thrust_opposing_velocity(self) -> Vector:
+        return -self.get_thrust_velocity()
 
     def distance_to_mun(self) -> float:
         return (self - self.Mun).length()
@@ -157,7 +161,7 @@ class Rocket(Vector):
     def update_mass(self) -> int:
         if len(self.stages) == 0:
             return -1
-        return self.stages[0].use_fuel()
+        return self.stages[0].use_fuel(self.throttle)
 
     def add_vector(self, v: Vector):
         self.x += v.x
@@ -167,14 +171,12 @@ class Rocket(Vector):
         return sum(map(lambda x: x.get_mass(), self.stages))
 
     def update_launch(self) -> float:
-        self.Mun.update_position()
+        if self.Mun:
+            self.Mun.update_position()
         if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
             self.stage_disattach()
         if calculate_apocenter(self, self.velocity, self.center) >= APOCENTER + 1000:
             self.is_engine_off = True
-
-        if APOCENTER - self.length() < 4000:
-            self.is_engine_off = False
 
         self.angle_to_radius = self.angle_function(self.length(), self.low, self.high)
         self.Force = self.get_gravity() + self.get_thrust() + self.get_drag()
@@ -186,11 +188,18 @@ class Rocket(Vector):
         return self.length()
 
     def update_orbit_setup(self) -> float:
-        self.Mun.update_position()
+        if self.Mun:
+            self.Mun.update_position()
         if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
             self.stage_disattach()
 
-        self.Force = self.get_gravity() + self.get_thrust()
+        if (
+            calculate_apocenter(self, self.velocity, self.center) - self.length()
+            < DIF_APOGEE
+        ):
+            self.is_engine_off = False
+
+        self.Force = self.get_gravity() + self.get_thrust_velocity()
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt
         self.add_vector(self.velocity * dt)
@@ -199,11 +208,28 @@ class Rocket(Vector):
         return self.length()
 
     def update_orbit(self) -> float:
-        self.Mun.update_position()
+        if self.Mun:
+            self.Mun.update_position()
         if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
             self.stage_disattach()
 
-        self.Force = self.get_gravity() + self.get_thrust()
+        self.Force = self.get_gravity() + self.get_thrust_velocity() + self.get_drag()
+        self.acceleration = self.Force / self.get_mass()
+        self.velocity += self.acceleration * dt
+        self.add_vector(self.velocity * dt)
+        if not self.is_engine_off:
+            self.update_mass()
+        return self.length()
+
+    def landing_orbit(self):
+        if self.Mun:
+            self.Mun.update_position()
+        if self.stages[0].fuel_mass < 0.5 and not self.is_engine_off:
+            self.stage_disattach()
+
+        self.Force = (
+            self.get_gravity() + self.get_thrust_opposing_velocity() + self.get_drag()
+        )
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt
         self.add_vector(self.velocity * dt)
@@ -212,6 +238,8 @@ class Rocket(Vector):
         return self.length()
 
     def mun_transfer_check(self) -> bool:
+        if not self.is_engine_off:
+            self.update_mass()
         a = (self.length() + self.Mun.length()) / 2
         t = 26739
         Mun = self.Mun.position_in(t)
@@ -223,6 +251,8 @@ class Rocket(Vector):
             MUN_DIST + self.Mun.radius
             <= (Mun - pos).length()
             < MUN_DIST + 30_000 + self.Mun.radius
+            or MUN_DIST < 0
+            and (Mun - pos).length() < -MUN_DIST + 30_000
         ):
             self.is_engine_off = False
             print(pos, pos.length())
@@ -230,7 +260,11 @@ class Rocket(Vector):
         return False
 
     def mun_transfer(self) -> bool:
-        self.Force = self.get_gravity() + self.get_thrust() + self.get_lunar_gravity()
+        if not self.is_engine_off:
+            self.update_mass()
+        self.Force = (
+            self.get_gravity() + self.get_thrust_velocity() + self.get_lunar_gravity()
+        )
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt
         self.add_vector(self.velocity * dt)
@@ -245,11 +279,14 @@ class Rocket(Vector):
             self.update_mass()
         return False
 
-    def mun_escape(self) -> bool:
+    def mun_escape(self):
+        if not self.is_engine_off:
+            self.update_mass()
         self.Force = (
             self.get_gravity()
             + self.get_lunar_gravity()
             + self.get_thrust_opposing_velocity()
+            + self.get_drag()
         )
         self.acceleration = self.Force / self.get_mass()
         self.velocity += self.acceleration * dt

@@ -1,4 +1,5 @@
 import krpc
+from krpc.services.spacecenter import SASMode
 import threading
 import stageMonitor
 import toOrbit
@@ -45,27 +46,31 @@ for exp in vessel.parts.experiments:
 
 while vessel.orbit.body.name != "Kerbin":
     space_center.rails_warp_factor = 5
+
 space_center.rails_warp_factor = 0
 
-vessel.control.activate_next_stage() 
+vessel.control.activate_next_stage()
 
 vessel.auto_pilot.engage()
 vessel.auto_pilot.reference_frame = vessel.orbital_reference_frame
-vessel.auto_pilot.target_direction = (0,1,0)
+vessel.auto_pilot.target_direction = (0, 1, 0)
 
-periapsisStream = conn.add_stream(getattr, vessel.orbit, 'periapsis_altitude')
+periapsisStream = conn.add_stream(getattr, vessel.orbit, "periapsis_altitude")
 
 for engine in vessel.parts.engines:
     engine.active = True
 
+
 vessel.control.throttle = 1.0
 
 while periapsisStream() < 65000:
-    print("waiting")
+    # print("waiting")
     sleep(0.1)
-    
+
 vessel.control.throttle = 0
-timeToPeriapsisStream = conn.add_stream(getattr, vessel.orbit, 'time_to_periapsis')
+
+timeToPeriapsisStream = conn.add_stream(getattr, vessel.orbit, "time_to_periapsis")
+
 
 while timeToPeriapsisStream() > 100:
     space_center.rails_warp_factor = 5
@@ -74,9 +79,9 @@ space_center.rails_warp_factor = 0
 
 vessel.auto_pilot.engage()
 vessel.auto_pilot.reference_frame = vessel.orbital_reference_frame
-vessel.auto_pilot.target_direction = (0,-1,0)
+vessel.auto_pilot.target_direction = (0, -1, 0)
 
-apoapsisStream = conn.add_stream(getattr, vessel.orbit, 'apoapsis_altitude')
+apoapsisStream = conn.add_stream(getattr, vessel.orbit, "apoapsis_altitude")
 
 while apoapsisStream() > 65000:
     while timeToPeriapsisStream() > 150 and apoapsisStream() > 65000:
@@ -86,7 +91,7 @@ while apoapsisStream() > 65000:
         sleep(0.1)
     vessel.auto_pilot.engage()
     vessel.auto_pilot.reference_frame = vessel.orbital_reference_frame
-    vessel.auto_pilot.target_direction = (0,-1,0)
+    vessel.auto_pilot.target_direction = (0, -1, 0)
     flag = True
     while flag:
         vessel.control.throttle = 1
@@ -97,28 +102,36 @@ while apoapsisStream() > 65000:
     sleep(1)
     space_center.rails_warp_factor = 7
 
-solar_panels = vessel.parts.solar_panels
-for sp in solar_panels:
-    sp.deployed = False 
 
 def Vec3Abs(t: tuple) -> float:
-    return math.sqrt(t[0]**2 + t[1]**2 + t[2]**2)    
+    return math.sqrt(t[0] ** 2 + t[1] ** 2 + t[2] ** 2)
+
 
 Sun = vessel.orbit.body.orbit.body
 Kerbin = Sun.satellites[2]
 KerbinRf = Kerbin.reference_frame
+are_sp_gone = False
 
-while Vec3Abs(vessel.velocity(KerbinRf)) > 500: 
+while Vec3Abs(vessel.velocity(KerbinRf)) > 500:
     vessel.auto_pilot.engage()
     vessel.auto_pilot.reference_frame = vessel.orbital_reference_frame
-    vessel.auto_pilot.target_direction = (0,-1,0)
+    vessel.auto_pilot.target_direction = (0, -1, 0)
     vessel.control.throttle = 1
+    if not are_sp_gone and Vec3Abs(vessel.position(KerbinRf)) < 45_000 + 600_000:
+        are_sp_gone = True
+        vessel.auto_pilot.target_direction = (0, 1, 0)
+        sleep(2)
+        vessel.control.throttle = 0
+        sleep(2)
+        vessel.control.activate_next_stage()
+        vessel.control.activate_next_stage()
+
 
 vessel.control.throttle = 0
 
 sleep(1)
-vessel.control.activate_next_stage() 
+# vessel.control.activate_next_stage()
 
-vessel.control.activate_next_stage() 
+vessel.control.activate_next_stage()
 
 vessel.parts.parachutes[0].deploy()
