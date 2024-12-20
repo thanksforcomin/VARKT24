@@ -64,7 +64,7 @@ def engage(connection, ascentProfileConstant=1.25):
     # Get to proper apoapsis/complete gravity turn
     while apoapsisStream() < 75000:
         # Collect values
-        targetPitch = 90 + angle_linear(altitude(), 1000, 30000)
+        targetPitch = 90 + angle_linear(altitude(), 3000, 30000)
         print("Current target pitch:", targetPitch, "with apoapsis", apoapsisStream())
 
         # Set autopilot

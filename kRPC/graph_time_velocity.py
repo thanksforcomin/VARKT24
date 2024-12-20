@@ -6,7 +6,7 @@ import numpy as np
 
 # print("Введите путь до логов, по которым хотите построить график: ")
 # file_name = input()
-file_name = "kRPC\\Logs\\to_orbit-18-12-2024-19-58.json"
+file_name = "kRPC\\Logs\\to_orbit-18-12-2024-22-38.json"
 
 positions = []
 dots_ksp = []
@@ -17,7 +17,7 @@ with open(file_name, "r") as file:
         data = json.loads(line)
         dots_ksp.append((data["time"], data["Velocity"]))
 
-with open("Math\\velocity_launch.json", "r") as file:
+with open("velocity_launch.json", "r") as file:
     heights_math = json.load(file)
 
 dots_math = [(float(k), v) for k, v in heights_math.items()]
