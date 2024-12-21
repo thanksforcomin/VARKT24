@@ -15,9 +15,9 @@ dots_math = []
 with open(file_name, "r") as file:
     for line in file:
         data = json.loads(line)
-        dots_ksp.append((data["time"], data["Velocity"]))
+        dots_ksp.append((data["time"], data["angle"]))
 
-with open("velocity_launch.json", "r") as file:
+with open("angle.json", "r") as file:
     heights_math = json.load(file)
 
 dots_math = [(float(k), v) for k, v in heights_math.items()]
@@ -36,10 +36,10 @@ plt.plot(
 plt.legend(("Полёт в ксп", "Мат. Модель"))
 
 plt.xlabel("Время (с.)")
-plt.ylabel("Скорость (м/с)")
-plt.title("Зависимость скорости от времени")
+plt.ylabel("Угол (градусы)")
+plt.title("Зависимость высоты от времени")
 plt.xticks([10 * i for i in range(33)])
-plt.yticks([250 * i for i in range(10)])
+plt.yticks([3 * i for i in range(int(31) + 2)])
 plt.grid(color="grey", linestyle="-")
 
 current_time = datetime.datetime.now().strftime("%d-%m-%Y-%H-%M")

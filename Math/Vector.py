@@ -1,4 +1,5 @@
 from math import sqrt, acos, cos, sin, pi, atan
+from tkinter import SE
 from typing import Self
 
 
@@ -13,21 +14,19 @@ class Vector:
     def __repr__(self):
         return f"({self.x}; {self.y})"
 
-    def __add__(self, vec) -> Self:
+    def __add__(self, vec):
         return Vector(self.x + vec.x, self.y + vec.y)
 
-    def __sub__(self, vec) -> Self:
+    def __sub__(self, vec):
         return Vector(self.x - vec.x, self.y - vec.y)
 
-    def __mul__(self, value: Self | int | float) -> Self:
-        if isinstance(value, Vector):
-            return self.x * value.x + self.y * value.y
+    def __mul__(self, value: int | float):
         return Vector(self.x * value, self.y * value)
 
-    def __truediv__(self, value: float | int) -> Self:
+    def __truediv__(self, value: float | int):
         return self.__mul__(1 / value)
 
-    def __neg__(self) -> Self:
+    def __neg__(self):
         return self.__mul__(-1)
 
     def __pos__(self) -> Self:
