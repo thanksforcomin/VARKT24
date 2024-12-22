@@ -6,7 +6,8 @@
 Кузнецов Артемий Сергеевич - Программист\
 Чудов Кирилл Андреевич - Физик, Математик
 # Ссылки
-[Отчет](https://docs.google.com/document/d/1Ok7q4ElHrTBNracqk8gDPPJ7a3m2rQUgK1zS5FvmIcw/edit?tab=t.0)\
+[Отчет](https://docs.google.com/document/d/1Ok7q4ElHrTBNracqk8gDPPJ7a3m2rQUgK1zS5FvmIcw)\
+[Презентация](https://docs.google.com/presentation/d/1yJuJf3Xnp0loHL7LzINT6v1Ub3VghJbTi7DMQOtDlIA)\
 [Видеоотчет TODO](...)\
 [Полет ракеты TODO](...)
 # Установка и настройка

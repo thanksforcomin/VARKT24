@@ -14,7 +14,6 @@ def monitor(vessel):
         solidFuel = resources.amount("SolidFuel")
         liquidFuel = resources.amount("LiquidFuel")
 
-        # print(solidFuel, liquidFuel)
         if solidFuel == 0 and liquidFuel == 0:
             vessel.control.activate_next_stage()  # Activates stage when fuel depleted
             print()

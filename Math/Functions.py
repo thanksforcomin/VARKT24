@@ -5,6 +5,18 @@ from math import acos, pi, sin, sqrt, e, sqrt, tan, atan
 from Center_of_gravity import Celestial
 
 
+def Vec3Abs(t: tuple) -> float:
+    return sqrt(t[0] ** 2 + t[1] ** 2 + t[2] ** 2)
+
+
+def angle_linear_degrees(height: float, low: float, high: float) -> float:
+    if height < low:
+        return 0
+    if height > high:
+        return -180 / 2
+    return -(180 / 2) * (height - low) / (high - low)
+
+
 def angle_linear(height: float, low: float, high: float) -> float:
     if height < low:
         return 0

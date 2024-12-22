@@ -3,7 +3,13 @@ import time
 import datetime
 import math
 import krpc
+import sys
 from krpc.services.spacecenter import Vessel
+
+# Kind of a workaround for the Math module  
+sys.path.insert(0, 'Math/')
+
+from Functions import Vec3Abs
 
 DEFAULT_FILE_NAME = "kRPC/Logs/{}-{}.json"
 
@@ -28,10 +34,6 @@ class Logger:
         self.logging = False
 
 
-def Vec3Abs(t: tuple) -> float:
-    return math.sqrt(t[0] ** 2 + t[1] ** 2 + t[2] ** 2)
-
-
 def collect_data_and_log(logger: Logger, vessel: Vessel):
     start = time.time()
     Sun = vessel.orbit.body.orbit.body
@@ -47,7 +49,6 @@ def collect_data_and_log(logger: Logger, vessel: Vessel):
         velocity = vessel.flight(KerbinRf).velocity
         altitude = vessel.flight().mean_altitude
         mass = vessel.mass
-        # acceleration = vessel.flight().g_force
 
         data = {
             "pos": pos,
@@ -56,14 +57,13 @@ def collect_data_and_log(logger: Logger, vessel: Vessel):
             "Velocity": Vec3Abs(velocity),
             "angle": vessel.control.pitch,
             "mass": mass,
-            # "Acceleration": acceleration,
-            # "Altitude": altitude,
         }
-        print(data)
-        # Вносим данные
+
+        # Append data to the log file
         logger.append_to_log_file(data)
         time.sleep(0.5)
 
     print("CLOSING FILE")
-    # Закрываем файл, когда полёт окончен
+
+    # Close the file
     logger.file.close()

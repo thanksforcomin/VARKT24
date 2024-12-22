@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 # For example: "kRPC\\Logs\\to_orbit-18-12-2024-22-38.json"
 file_name = ""
 
+
 positions = []
 dots_ksp = []
 dots_math = []
@@ -14,9 +15,9 @@ dots_math = []
 with open(file_name, "r") as file:
     for line in file:
         data = json.loads(line)
-        dots_ksp.append((data["time"], data["angle"]))
+        dots_ksp.append((data["time"], data["Velocity"]))
 
-with open("angle.json", "r") as file:
+with open("velocity_launch.json", "r") as file:
     heights_math = json.load(file)
 
 dots_math = [(float(k), v) for k, v in heights_math.items()]
@@ -35,10 +36,10 @@ plt.plot(
 plt.legend(("Полёт в ксп", "Мат. Модель"))
 
 plt.xlabel("Время (с.)")
-plt.ylabel("Угол (градусы)")
-plt.title("Зависимость высоты от времени")
+plt.ylabel("Скорость (м/с)")
+plt.title("Зависимость скорости от времени")
 plt.xticks([10 * i for i in range(33)])
-plt.yticks([3 * i for i in range(int(31) + 2)])
+plt.yticks([250 * i for i in range(10)])
 plt.grid(color="grey", linestyle="-")
 
 current_time = datetime.datetime.now().strftime("%d-%m-%Y-%H-%M")
