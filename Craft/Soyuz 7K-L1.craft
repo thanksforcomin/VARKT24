@@ -2,9 +2,9 @@ ship = Soyuz 7K-L1
 version = 1.12.3
 description = 
 type = VAB
-size = 8.14367294,18.6661854,6.19687605
+size = 8.14368439,18.8243904,6.19688177
 steamPublishedFileId = 0
-persistentId = 4293736163
+persistentId = 1716238186
 rot = 0,0,0,0
 missionFlag = Squad/Flags/orbit
 vesselType = Debris
@@ -16,7 +16,7 @@ PART
 {
 	part = virgo.crew.s1.1_4293998912
 	partName = Part
-	persistentId = 2513007684
+	persistentId = 4119336284
 	pos = 0.418966889,24.1384258,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0.418966889,24.1384258,-0.460294485
@@ -317,7 +317,7 @@ PART
 {
 	part = parachuteSingle_4293985852
 	partName = Part
-	persistentId = 1374039076
+	persistentId = 683195805
 	pos = 0.418966889,24.6535072,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,0.515081406,0
@@ -479,7 +479,7 @@ PART
 {
 	part = lepus.high.gain.antenna.srf.1_4293921622
 	partName = Part
-	persistentId = 1202434790
+	persistentId = 2782151344
 	pos = 0.201972291,24.22439,0.0163045824
 	attPos = 0,0,0
 	attPos0 = -0.216994599,0.0859632492,0.476599038
@@ -603,7 +603,7 @@ PART
 {
 	part = atria.low.gain.antenna.srf.3_4293918728
 	partName = Part
-	persistentId = 2005968951
+	persistentId = 2037706107
 	pos = -0.180860877,23.6838284,-0.458536863
 	attPos = 0,0,0
 	attPos0 = -0.599827766,-0.454596519,0.00175762177
@@ -745,7 +745,7 @@ PART
 {
 	part = atria.low.gain.antenna.srf.3_4293917794
 	partName = Part
-	persistentId = 2872889653
+	persistentId = 2473340529
 	pos = 1.01879478,23.6838284,-0.462052166
 	attPos = 0,0,0
 	attPos0 = 0.599827766,-0.454596519,-0.00175767415
@@ -887,7 +887,7 @@ PART
 {
 	part = HeatShield1_4293272268
 	partName = Part
-	persistentId = 1178462453
+	persistentId = 4212537118
 	pos = 0.418966889,23.6164265,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,-0.521999359,0
@@ -1100,7 +1100,7 @@ PART
 {
 	part = Decoupler.1_4293655260
 	partName = Part
-	persistentId = 3632714155
+	persistentId = 1848542305
 	pos = 0.418966889,23.5664272,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,-0.0499992371,0
@@ -1272,7 +1272,7 @@ PART
 {
 	part = ServiceBay.125.v2_4293955226
 	partName = Part
-	persistentId = 1176825476
+	persistentId = 1283036354
 	pos = 0.418966889,23.2164288,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,-0.349998474,0
@@ -1435,7 +1435,7 @@ PART
 {
 	part = batteryPack_4294183430
 	partName = Part
-	persistentId = 2730363115
+	persistentId = 922183269
 	pos = 0.122366309,22.9378529,-0.219856113
 	attPos = 0,0,0
 	attPos0 = -0.29660058,-0.278575897,0.240438357
@@ -1532,7 +1532,7 @@ PART
 {
 	part = sensorGravimeter_4294188966
 	partName = Part
-	persistentId = 2057686871
+	persistentId = 2164326667
 	pos = 0.44101274,22.9378529,-0.747069836
 	attPos = 0,0,0
 	attPos0 = 0.0220458508,-0.278575897,-0.286775351
@@ -1667,7 +1667,7 @@ PART
 {
 	part = fuelTankSmallFlat_4294140434
 	partName = Part
-	persistentId = 1796885996
+	persistentId = 2308418908
 	pos = 0.418966889,22.6039276,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,-0.612500191,0
@@ -1795,7 +1795,7 @@ PART
 {
 	part = fuelTankSmallFlat_4294139430
 	partName = Part
-	persistentId = 3481999220
+	persistentId = 3176138901
 	pos = 0.418966889,21.9789276,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,-0.625,0
@@ -1923,7 +1923,7 @@ PART
 {
 	part = radialEngineMini.v2_4294134932
 	partName = Part
-	persistentId = 663222035
+	persistentId = 1709068806
 	pos = 0.325551152,21.8415775,-1.06399858
 	attPos = 0,0,0
 	attPos0 = -0.0934157521,-0.137351036,-0.603704095
@@ -1932,7 +1932,7 @@ PART
 	attRot0 = 1.78813934E-07,0,0,-1
 	mir = 1,1,1
 	symMethod = Radial
-	autostrutMode = Off
+	autostrutMode = Root
 	rigidAttachment = False
 	istg = 3
 	resPri = 0
@@ -2194,7 +2194,7 @@ PART
 {
 	part = radialEngineMini.v2_4294134498
 	partName = Part
-	persistentId = 731093897
+	persistentId = 2080474934
 	pos = 0.512382686,21.8415775,0.14340961
 	attPos = 0,0,0
 	attPos0 = 0.0934158042,-0.137351036,0.603704095
@@ -2203,7 +2203,7 @@ PART
 	attRot0 = -7.81620489E-15,-1,-1.78813934E-07,4.37113883E-08
 	mir = 1,1,1
 	symMethod = Radial
-	autostrutMode = Off
+	autostrutMode = Root
 	rigidAttachment = False
 	istg = 3
 	resPri = 0
@@ -2457,7 +2457,7 @@ PART
 {
 	part = HeatShield1_4293980692
 	partName = Part
-	persistentId = 1984773571
+	persistentId = 3276958625
 	pos = 0.418966889,21.6444263,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,-0.334500313,0
@@ -2670,7 +2670,7 @@ PART
 {
 	part = rn.proton.blockd.dec.z_4294088116
 	partName = Part
-	persistentId = 526053685
+	persistentId = 3495521007
 	pos = 0.418966889,21.1665363,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,-0.477890968,0
@@ -2887,7 +2887,7 @@ PART
 {
 	part = rn.proton.blockd_4294085392
 	partName = Part
-	persistentId = 1978456213
+	persistentId = 769447409
 	pos = 0.418966889,18.9741898,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,-2.19234657,0
@@ -2909,9 +2909,9 @@ PART
 	modCost = 0
 	modMass = 0
 	modSize = 0,0,0
-	link = fairingSize2_4293898112
+	link = Separator.2_4292725536
 	attN = top,rn.proton.blockd.dec.z_4294088116_0|1.90654981|0_0|0.744400024|0_0|1.90654981|0_0|0.744400024|0
-	attN = bottom,fairingSize2_4293898112_0|-2.15274549|0_0|-0.744400024|0_0|-2.15274549|0_0|-0.744400024|0
+	attN = bottom,Separator.2_4292725536_0|-2.15274549|0_0|-0.744400024|0_0|-2.15274549|0_0|-0.744400024|0
 	attN = v1,Null_0_-0.840502024|-1.18431818|0_0|-0.744400024|0_-0.840502024|-1.18431818|0_0|-0.744400024|0
 	attN = v2,Null_0_0.840502024|-1.18431818|0_0|-0.744400024|0_0.840502024|-1.18431818|0_0|-0.744400024|0
 	EVENTS
@@ -3154,12 +3154,716 @@ PART
 }
 PART
 {
-	part = fairingSize2_4293898112
+	part = radialDecoupler_4293657380
 	partName = Part
-	persistentId = 2113548653
-	pos = 0.418966889,16.6014442,-0.460294485
+	persistentId = 1888133655
+	pos = -0.194763184,22.6618538,-0.460294455
 	attPos = 0,0,0
-	attPos0 = 0,-2.37274551,0
+	attPos0 = -0.613730073,0.057926178,2.98023224E-08
+	rot = 0,0,0,1
+	attRot = 0,0,0,1
+	attRot0 = 0,0,0,1
+	mir = 1,1,1
+	symMethod = Radial
+	autostrutMode = Off
+	rigidAttachment = False
+	istg = 2
+	resPri = 0
+	dstg = 5
+	sidx = 0
+	sqor = 2
+	sepI = 2
+	attm = 1
+	sameVesselCollision = False
+	modCost = 0
+	modMass = 0
+	modSize = 0,0,0
+	link = solarPanelOX10L_4294145174
+	sym = radialDecoupler_4293656572
+	srfN = srfAttach,fuelTankSmallFlat_4294140434,COL1,0.00999999978|0|0,1|0|0,0.00999999978|0|0
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+		ToggleSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		SetSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		RemoveSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+	}
+	PARTDATA
+	{
+	}
+	MODULE
+	{
+		name = ModuleAnchoredDecoupler
+		isEnabled = True
+		ejectionForcePercent = 100
+		isDecoupled = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			DecoupleAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleToggleCrossfeed
+		isEnabled = True
+		crossfeedStatus = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+			EnableAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+			DisableAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleTestSubject
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleCargoPart
+		isEnabled = True
+		beingAttached = False
+		beingSettled = False
+		reinitResourcesOnStoreInVessel = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = KOSNameTag
+		isEnabled = True
+		nameTag = 
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+}
+PART
+{
+	part = solarPanelOX10L_4294145174
+	partName = Part
+	persistentId = 1023866720
+	pos = -0.356899202,22.6865044,-0.460294455
+	attPos = 0,0,0
+	attPos0 = -0.162136018,0.0246505737,0
+	rot = -7.48678413E-23,0,1.77635684E-15,1
+	attRot = 0,0,0,1
+	attRot0 = -7.48678413E-23,0,1.77635684E-15,1
+	mir = 1,1,1
+	symMethod = Radial
+	autostrutMode = Root
+	rigidAttachment = False
+	istg = 2
+	resPri = 0
+	dstg = 6
+	sidx = -1
+	sqor = -1
+	sepI = 2
+	attm = 1
+	sameVesselCollision = False
+	modCost = 0
+	modMass = 0
+	modSize = 0,0,0
+	sym = solarPanelOX10L_4293656244
+	srfN = srfAttach,radialDecoupler_4293657380,base,0|0|0,1|0|0,0|0|0
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+		ToggleSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		SetSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		RemoveSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+	}
+	PARTDATA
+	{
+	}
+	MODULE
+	{
+		name = ModuleDeployableSolarPanel
+		isEnabled = True
+		efficiencyMult = 1
+		launchUT = -1
+		currentRotation = (-0.5, 0.5, 0.5, 0.5)
+		storedAnimationTime = 0
+		storedAnimationSpeed = 1
+		deployState = RETRACTED
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			ExtendPanelsAction
+			{
+				actionGroup = None
+				active = False
+				wasActiveBeforePartWasAdjusted = False
+			}
+			ExtendAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+			RetractAction
+			{
+				actionGroup = None
+				active = False
+				wasActiveBeforePartWasAdjusted = False
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleCargoPart
+		isEnabled = True
+		beingAttached = False
+		beingSettled = False
+		reinitResourcesOnStoreInVessel = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = KOSNameTag
+		isEnabled = True
+		nameTag = 
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+}
+PART
+{
+	part = radialDecoupler_4293656572
+	partName = Part
+	persistentId = 3951143737
+	pos = 1.03269696,22.6618538,-0.460294574
+	attPos = 0,0,0
+	attPos0 = 0.613730073,0.057926178,-8.94069672E-08
+	rot = 0,1,0,-4.37113883E-08
+	attRot = 0,0,0,1
+	attRot0 = 0,1,0,-4.37113883E-08
+	mir = 1,1,1
+	symMethod = Radial
+	autostrutMode = Off
+	rigidAttachment = False
+	istg = 2
+	resPri = 0
+	dstg = 5
+	sidx = 0
+	sqor = 2
+	sepI = 2
+	attm = 1
+	sameVesselCollision = False
+	modCost = 0
+	modMass = 0
+	modSize = 0,0,0
+	link = solarPanelOX10L_4293656244
+	sym = radialDecoupler_4293657380
+	srfN = srfAttach,fuelTankSmallFlat_4294140434,COL1,0.00999999978|0|0,1|0|0,0.00999999978|0|0
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+		ToggleSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		SetSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		RemoveSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+	}
+	PARTDATA
+	{
+	}
+	MODULE
+	{
+		name = ModuleAnchoredDecoupler
+		isEnabled = True
+		ejectionForcePercent = 100
+		isDecoupled = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			DecoupleAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleToggleCrossfeed
+		isEnabled = True
+		crossfeedStatus = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+			EnableAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+			DisableAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleTestSubject
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleCargoPart
+		isEnabled = True
+		beingAttached = False
+		beingSettled = False
+		reinitResourcesOnStoreInVessel = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = KOSNameTag
+		isEnabled = True
+		nameTag = 
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+}
+PART
+{
+	part = solarPanelOX10L_4293656244
+	partName = Part
+	persistentId = 1691429635
+	pos = 1.19483304,22.6865044,-0.460294574
+	attPos = 0,0,0
+	attPos0 = -0.162136078,0.0246505737,-1.41743861E-08
+	rot = 1.77635684E-15,1,-2.77918221E-24,-4.37113883E-08
+	attRot = 0,0,0,1
+	attRot0 = -7.48678413E-23,0,1.77635684E-15,1
+	mir = 1,1,1
+	symMethod = Radial
+	autostrutMode = Root
+	rigidAttachment = False
+	istg = 2
+	resPri = 0
+	dstg = 6
+	sidx = -1
+	sqor = -1
+	sepI = 2
+	attm = 1
+	sameVesselCollision = False
+	modCost = 0
+	modMass = 0
+	modSize = 0,0,0
+	sym = solarPanelOX10L_4294145174
+	srfN = srfAttach,radialDecoupler_4293656572,base,0|0|0,1|0|0,0|0|0
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+		ToggleSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		SetSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		RemoveSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+	}
+	PARTDATA
+	{
+	}
+	MODULE
+	{
+		name = ModuleDeployableSolarPanel
+		isEnabled = True
+		efficiencyMult = 1
+		launchUT = -1
+		currentRotation = (-0.5, 0.5, 0.5, 0.5)
+		storedAnimationTime = 0
+		storedAnimationSpeed = 1
+		deployState = RETRACTED
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			ExtendPanelsAction
+			{
+				actionGroup = None
+				active = False
+				wasActiveBeforePartWasAdjusted = False
+			}
+			ExtendAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+			RetractAction
+			{
+				actionGroup = None
+				active = False
+				wasActiveBeforePartWasAdjusted = False
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleCargoPart
+		isEnabled = True
+		beingAttached = False
+		beingSettled = False
+		reinitResourcesOnStoreInVessel = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = KOSNameTag
+		isEnabled = True
+		nameTag = 
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+}
+PART
+{
+	part = grus.sensor.multispectral.camera.srf.1_4293657782
+	partName = Part
+	persistentId = 4215014786
+	pos = 0.418966889,23.141798,0.151269495
+	attPos = 0,0,0
+	attPos0 = 0,-0.0746307373,0.611563981
+	rot = 0,1,0,1.54590043E-06
+	attRot = 0,0,0,1
+	attRot0 = 0,1,0,1.54590043E-06
+	mir = 1,1,1
+	symMethod = Radial
+	autostrutMode = Off
+	rigidAttachment = False
+	istg = 1
+	resPri = 0
+	dstg = 4
+	sidx = -1
+	sqor = -1
+	sepI = 1
+	attm = 1
+	sameVesselCollision = False
+	modCost = 0
+	modMass = 0
+	modSize = 0,0,0
+	srfN = srfAttach,ServiceBay.125.v2_4293955226,COL_Front,0|0|0,0|0|-1,0|0|0
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+		ToggleSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		SetSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		RemoveSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+	}
+	PARTDATA
+	{
+	}
+	MODULE
+	{
+		name = ModuleCargoPart
+		isEnabled = True
+		beingAttached = False
+		beingSettled = False
+		reinitResourcesOnStoreInVessel = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleScienceExperiment
+		isEnabled = True
+		Deployed = False
+		Inoperable = False
+		cooldownToGo = 0
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			DeployAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+			ResetAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleScienceExperiment
+		isEnabled = True
+		Deployed = False
+		Inoperable = False
+		cooldownToGo = 0
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			DeployAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+			ResetAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = KOSNameTag
+		isEnabled = True
+		nameTag = 
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+}
+PART
+{
+	part = Separator.2_4292725536
+	partName = Part
+	persistentId = 1585228483
+	pos = 0.418966889,16.7214451,-0.460294485
+	attPos = 0,0,0
+	attPos0 = 0,-2.25274467,0
 	rot = 0,0,0,1
 	attRot = 0,0,0,1
 	attRot0 = 0,0,0,1
@@ -3170,15 +3874,187 @@ PART
 	istg = 4
 	resPri = 0
 	dstg = 9
-	sidx = 1
+	sidx = 2
 	sqor = 4
-	sepI = 3
+	sepI = 4
 	attm = 0
 	sameVesselCollision = False
-	modCost = 854.595337
-	modMass = 0.854595363
+	modCost = 0
+	modMass = 0
 	modSize = 0,0,0
-	link = Decoupler.2_4293861026
+	link = fairingSize2_4293898112
+	attN = top,rn.proton.blockd_4294085392_0|0.100000001|0_0|1|0_0|0.100000001|0_0|1|0
+	attN = bottom,fairingSize2_4293898112_0|-0.100000001|0_0|-1|0_0|-0.100000001|0_0|-1|0
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+		ToggleSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		SetSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+		RemoveSameVesselInteraction
+		{
+			actionGroup = None
+			wasActiveBeforePartWasAdjusted = False
+		}
+	}
+	PARTDATA
+	{
+	}
+	MODULE
+	{
+		name = ModuleDecouple
+		isEnabled = True
+		ejectionForcePercent = 100
+		isDecoupled = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			DecoupleAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleToggleCrossfeed
+		isEnabled = True
+		crossfeedStatus = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+			EnableAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+			DisableAction
+			{
+				actionGroup = None
+				wasActiveBeforePartWasAdjusted = False
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleTestSubject
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModulePartVariants
+		isEnabled = True
+		useVariantMass = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleCargoPart
+		isEnabled = True
+		beingAttached = False
+		beingSettled = False
+		reinitResourcesOnStoreInVessel = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = KOSNameTag
+		isEnabled = True
+		nameTag = 
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+}
+PART
+{
+	part = fairingSize2_4293898112
+	partName = Part
+	persistentId = 4160928108
+	pos = 0.418966889,16.4014454,-0.460294485
+	attPos = 0,0,0
+	attPos0 = 0,-0.319999695,0
+	rot = 0,0,0,1
+	attRot = 0,0,0,1
+	attRot0 = 0,0,0,1
+	mir = 1,1,1
+	symMethod = Radial
+	autostrutMode = Off
+	rigidAttachment = False
+	istg = 4
+	resPri = 0
+	dstg = 11
+	sidx = 1
+	sqor = 4
+	sepI = 4
+	attm = 0
+	sameVesselCollision = False
+	modCost = 902.781189
+	modMass = 0.902781188
+	modSize = 0,0,0
+	link = Rockomax32.BW_4294149844
 	attN = interstage01a,Null_0_0|1.19000006|0_0|-1|0_0|1.19000006|0_0|-1|0
 	attN = interstage01b,Null_0_0|1.25|0_0|1|0_0|1.25|0_0|1|0
 	attN = interstage02a,Null_0_0|2.19000006|0_0|-1|0_0|2.19000006|0_0|-1|0
@@ -3191,8 +4067,8 @@ PART
 	attN = interstage05b,Null_0_0|5.25|0_0|1|0_0|5.25|0_0|1|0
 	attN = interstage06a,Null_0_0|6.19000006|0_0|-1|0_0|6.19000006|0_0|-1|0
 	attN = interstage06b,Null_0_0|6.25|0_0|1|0_0|6.25|0_0|1|0
-	attN = top,rn.proton.blockd_4294085392_0|0.219999999|0_0|1|0_0|0.219999999|0_0|1|0
-	attN = bottom,Decoupler.2_4293861026_0|-0.200000003|0_0|-1|0_0|-0.200000003|0_0|-1|0
+	attN = top,Separator.2_4292725536_0|0.219999999|0_0|1|0_0|0.219999999|0_0|1|0
+	attN = bottom,Rockomax32.BW_4294149844_0|-0.200000003|0_0|-1|0_0|-0.200000003|0_0|-1|0
 	EVENTS
 	{
 	}
@@ -3261,8 +4137,8 @@ PART
 		}
 		XSECTION
 		{
-			h = 2.12851906
-			r = 1.80689836
+			h = 3.3241024
+			r = 1.77461398
 			ATTACHEDFLAG
 			{
 				attachedFlagPartIDs = 
@@ -3281,8 +4157,8 @@ PART
 		}
 		XSECTION
 		{
-			h = 4.52101707
-			r = 1.43029535
+			h = 5.00093269
+			r = 1.45559931
 			ATTACHEDFLAG
 			{
 				attachedFlagPartIDs = 
@@ -3301,8 +4177,8 @@ PART
 		}
 		XSECTION
 		{
-			h = 4.98367691
-			r = 1.27066743
+			h = 7.69400215
+			r = 1.01580608
 			ATTACHEDFLAG
 			{
 				attachedFlagPartIDs = 
@@ -3321,8 +4197,8 @@ PART
 		}
 		XSECTION
 		{
-			h = 7.28104591
-			r = 1.00088191
+			h = 8.42230606
+			r = 0.375
 			ATTACHEDFLAG
 			{
 				attachedFlagPartIDs = 
@@ -3337,26 +4213,6 @@ PART
 			{
 				attachedFlagPartIDs = 
 				panelIndex = 14
-			}
-		}
-		XSECTION
-		{
-			h = 8.04756927
-			r = 0.375
-			ATTACHEDFLAG
-			{
-				attachedFlagPartIDs = 
-				panelIndex = 15
-			}
-			ATTACHEDFLAG
-			{
-				attachedFlagPartIDs = 
-				panelIndex = 16
-			}
-			ATTACHEDFLAG
-			{
-				attachedFlagPartIDs = 
-				panelIndex = 17
 			}
 		}
 		UPGRADESAPPLIED
@@ -3667,184 +4523,12 @@ PART
 }
 PART
 {
-	part = Decoupler.2_4293861026
-	partName = Part
-	persistentId = 1795074950
-	pos = 0.418966889,16.3014431,-0.460294485
-	attPos = 0,0,0
-	attPos0 = 0,-0.300000191,0
-	rot = 0,0,0,1
-	attRot = 0,0,0,1
-	attRot0 = 0,0,0,1
-	mir = 1,1,1
-	symMethod = Radial
-	autostrutMode = Off
-	rigidAttachment = False
-	istg = 4
-	resPri = 0
-	dstg = 11
-	sidx = 2
-	sqor = 4
-	sepI = 4
-	attm = 0
-	sameVesselCollision = False
-	modCost = 0
-	modMass = 0
-	modSize = 0,0,0
-	link = Rockomax32.BW_4294149844
-	attN = top,fairingSize2_4293898112_0|0.100000001|0_0|1|0_0|0.100000001|0_0|1|0
-	attN = bottom,Rockomax32.BW_4294149844_0|-0.100000001|0_0|-1|0_0|-0.100000001|0_0|-1|0
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-		ToggleSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		SetSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		RemoveSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-	}
-	PARTDATA
-	{
-	}
-	MODULE
-	{
-		name = ModuleDecouple
-		isEnabled = True
-		ejectionForcePercent = 100
-		isDecoupled = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			DecoupleAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleToggleCrossfeed
-		isEnabled = True
-		crossfeedStatus = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-			EnableAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-			DisableAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleTestSubject
-		isEnabled = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModulePartVariants
-		isEnabled = True
-		useVariantMass = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleCargoPart
-		isEnabled = True
-		beingAttached = False
-		beingSettled = False
-		reinitResourcesOnStoreInVessel = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = KOSNameTag
-		isEnabled = True
-		nameTag = 
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-}
-PART
-{
 	part = Rockomax32.BW_4294149844
 	partName = Part
-	persistentId = 3356979773
-	pos = 0.418966889,14.3414431,-0.460294485
+	persistentId = 467149079
+	pos = 0.418966889,14.341445,-0.460294485
 	attPos = 0,0,0
-	attPos0 = 0,-1.96000004,0
+	attPos0 = 0,-2.06000042,0
 	rot = 0,0,0,1
 	attRot = 0,0,0,1
 	attRot0 = 0,0,0,1
@@ -3864,7 +4548,7 @@ PART
 	modMass = 0
 	modSize = 0,0,0
 	link = Rockomax32.BW_4293500694
-	attN = top,Decoupler.2_4293861026_0|1.86000001|0_0|1|0_0|1.86000001|0_0|1|0
+	attN = top,fairingSize2_4293898112_0|1.86000001|0_0|1|0_0|1.86000001|0_0|1|0
 	attN = bottom,Rockomax32.BW_4293500694_0|-1.86000001|0_0|-1|0_0|-1.86000001|0_0|-1|0
 	EVENTS
 	{
@@ -3949,8 +4633,8 @@ PART
 {
 	part = Rockomax32.BW_4293500694
 	partName = Part
-	persistentId = 2304551562
-	pos = 0.418966889,10.6214437,-0.460294485
+	persistentId = 230667
+	pos = 0.418966889,10.6214457,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,-3.71999931,0
 	rot = 0,0,0,1
@@ -4059,8 +4743,8 @@ PART
 {
 	part = engineLargeSkipper.v2_4293567950
 	partName = Part
-	persistentId = 3820591488
-	pos = 0.418966889,7.7484436,-0.460294485
+	persistentId = 93119661
+	pos = 0.418966889,7.74844551,-0.460294485
 	attPos = 0,0,0
 	attPos0 = 0,-2.87300014,0
 	rot = 0,0,0,1
@@ -4350,8 +5034,8 @@ PART
 {
 	part = radialDecoupler_4293380846
 	partName = Part
-	persistentId = 3875749613
-	pos = -0.661251903,10.8978148,-1.08395922
+	persistentId = 2954424960
+	pos = -0.661251903,10.8978167,-1.08395922
 	attPos = 0,0,0
 	attPos0 = -1.08021879,0.276371002,-0.623664737
 	rot = -4.44636283E-09,0.258819103,1.65940488E-08,-0.965925872
@@ -4506,8 +5190,8 @@ PART
 {
 	part = Rockomax32.BW_4293380784
 	partName = Part
-	persistentId = 1617167306
-	pos = -1.88411462,11.0072498,-1.7899797
+	persistentId = 3000354666
+	pos = -1.88411462,11.0072517,-1.7899797
 	attPos = 0,0,0
 	attPos0 = -1.41203821,0.109435074,0
 	rot = -4.44636195E-09,0.258819103,1.65940524E-08,-0.965925872
@@ -4618,8 +5302,8 @@ PART
 {
 	part = rocketNoseCone.v3_4293380720
 	partName = Part
-	persistentId = 1508182753
-	pos = -1.88411605,12.8672504,-1.78998089
+	persistentId = 3897809846
+	pos = -1.88411605,12.8672523,-1.78998089
 	attPos = 0,0,0
 	attPos0 = -1.19209304E-07,1.86000061,6.60804876E-15
 	rot = 2.95063192E-08,0.923879504,3.84534111E-08,-0.382683635
@@ -4722,11 +5406,11 @@ PART
 {
 	part = strutConnector_4293380654
 	partName = CompoundPart
-	persistentId = 591107113
-	pos = -1.85782516,14.9361725,-1.88809991
+	persistentId = 2219077012
+	pos = -1.85782516,14.9361744,-1.88809991
 	attPos = 0,0,0
 	attPos0 = -0.0879709423,2.06892204,0.0507900529
-	rot = -0.513556361,0.60470593,0.394065917,-0.464007497
+	rot = -0.513556302,0.60470587,0.394065857,-0.464007556
 	attRot = 0,0,0,1
 	attRot0 = -0.167539731,0.197275698,-0.62526685,0.736243248
 	mir = 1,1,1
@@ -4775,9 +5459,9 @@ PART
 	PARTDATA
 	{
 		tgt = 4293898112
-		tpersID = 2113548653
-		pos = -2.45782089,0.526561916,-1.30739069
-		rot = 0,-0.580990076,-0.254623473,0.773057222
+		tpersID = 4160928108
+		pos = -2.27340126,0.487054348,-1.20929754
+		rot = 0,-0.619714916,-0.260186493,0.740443408
 		dir = -0.867486,0.185849175,-0.461441427
 		col = collider2
 	}
@@ -4866,8 +5550,8 @@ PART
 {
 	part = engineLargeSkipper.v2_4293380430
 	partName = Part
-	persistentId = 3612357032
-	pos = -1.88411558,8.13424873,-1.78998029
+	persistentId = 1825064118
+	pos = -1.88411558,8.13425064,-1.78998029
 	attPos = 0,0,0
 	attPos0 = -1.19209268E-07,-2.8730011,-1.02069495E-14
 	rot = 2.95063263E-08,0.923879504,3.84534111E-08,-0.382683635
@@ -5151,10 +5835,10 @@ PART
 	part = launchClamp1_4293379958
 	partName = Part
 	persistentId = 1224065977
-	pos = -3.83316278,9.35725212,-2.3122263
+	pos = -3.83316278,9.35725403,-2.3122263
 	attPos = 0,0,0
 	attPos0 = -1.94904816,-1.64999771,0.522245347
-	rot = -1.95694962E-08,-0.60876143,9.41168832E-09,-0.793353438
+	rot = -1.95694838E-08,-0.60876143,9.41169009E-09,-0.793353438
 	attRot = 0,0,0,1
 	attRot0 = 2.83740276E-09,0.7933532,-3.6977732E-09,0.608761668
 	mir = 1,1,1
@@ -5202,10 +5886,10 @@ PART
 	{
 		name = LaunchClamp
 		isEnabled = True
-		scaleFactor = 3.97012544
-		height = 10.0174026
+		scaleFactor = 3.97012615
+		height = 10.0174046
 		stagingEnabled = True
-		towerRot = 1.9569498E-08,0.60876143,-9.41168743E-09,-0.793353438
+		towerRot = 1.95694838E-08,0.60876143,-9.41168921E-09,-0.793353438
 		EVENTS
 		{
 		}
@@ -5292,8 +5976,8 @@ PART
 {
 	part = radialDecoupler_4294140790
 	partName = Part
-	persistentId = 2986888190
-	pos = 1.49918568,10.8978148,0.163370132
+	persistentId = 4101045900
+	pos = 1.49918568,10.8978167,0.163370132
 	attPos = 0,0,0
 	attPos0 = 1.08021879,0.276371002,0.623664618
 	rot = 1.65940488E-08,-0.965925872,4.44636195E-09,-0.258819073
@@ -5448,8 +6132,8 @@ PART
 {
 	part = Rockomax32.BW_4294140728
 	partName = Part
-	persistentId = 3469444431
-	pos = 2.72205257,11.0072498,0.869392157
+	persistentId = 1241533459
+	pos = 2.72205734,11.0072517,0.869395375
 	attPos = 0,0,0
 	attPos0 = -1.41203821,0.109435074,0
 	rot = 1.65940524E-08,-0.965925872,4.44636106E-09,-0.258819073
@@ -5560,8 +6244,8 @@ PART
 {
 	part = rocketNoseCone.v3_4294140664
 	partName = Part
-	persistentId = 4217278640
-	pos = 2.72205639,12.8672504,0.869394541
+	persistentId = 743685788
+	pos = 2.72206688,12.8672523,0.869400501
 	attPos = 0,0,0
 	attPos0 = -1.19209304E-07,1.86000061,6.60804876E-15
 	rot = 3.84534111E-08,-0.382683694,-2.95063209E-08,-0.923879504
@@ -5664,8 +6348,8 @@ PART
 {
 	part = strutConnector_4294140598
 	partName = CompoundPart
-	persistentId = 2631306647
-	pos = 2.69576597,14.9361744,0.967513561
+	persistentId = 1107576504
+	pos = 2.69577932,14.9361763,0.967521787
 	attPos = 0,0,0
 	attPos0 = -0.0879709423,2.06892204,0.0507900529
 	rot = 0.394065887,-0.464007318,0.51355648,-0.60470587
@@ -5716,12 +6400,12 @@ PART
 	}
 	PARTDATA
 	{
-		tgt = 4293898112
-		tpersID = 2113548653
-		pos = -2.46889853,0.528933942,-1.31328559
-		rot = 0,-0.554103255,-0.321870655,0.767703652
+		tgt = 4294085392
+		tpersID = 769447409
+		pos = -2.93938208,0.629730165,-1.5635432
+		rot = 0,-0.0981373191,-0.149336144,0.983904362
 		dir = -0.867486,0.185849175,-0.461441427
-		col = collider1
+		col = col1
 	}
 	MODULE
 	{
@@ -5808,8 +6492,8 @@ PART
 {
 	part = engineLargeSkipper.v2_4294140494
 	partName = Part
-	persistentId = 2307282985
-	pos = 2.72205782,8.13424492,0.869395971
+	persistentId = 2925644059
+	pos = 2.72206831,8.13424683,0.869401932
 	attPos = 0,0,0
 	attPos0 = -1.19209268E-07,-2.8730011,-1.02069495E-14
 	rot = 3.84534182E-08,-0.382683694,-2.95063245E-08,-0.923879504
@@ -6093,7 +6777,7 @@ PART
 	part = launchClamp1_4294140334
 	partName = Part
 	persistentId = 2946780280
-	pos = 4.671103,9.35725212,1.39163935
+	pos = 4.67111254,9.35725403,1.391644
 	attPos = 0,0,0
 	attPos0 = -1.94904816,-1.64999771,0.522245347
 	rot = 9.41168921E-09,-0.793353438,1.95694962E-08,0.60876143
@@ -6144,8 +6828,8 @@ PART
 	{
 		name = LaunchClamp
 		isEnabled = True
-		scaleFactor = 3.97012544
-		height = 10.0174026
+		scaleFactor = 3.97012615
+		height = 10.0174046
 		stagingEnabled = True
 		towerRot = -9.41168832E-09,0.793353438,-1.95694962E-08,0.60876143
 		EVENTS
@@ -6208,710 +6892,6 @@ PART
 		}
 		ACTIONS
 		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = KOSNameTag
-		isEnabled = True
-		nameTag = 
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-}
-PART
-{
-	part = radialDecoupler_4293657380
-	partName = Part
-	persistentId = 3032832740
-	pos = -0.194763184,22.6618538,-0.460294455
-	attPos = 0,0,0
-	attPos0 = -0.613730073,0.057926178,2.98023224E-08
-	rot = 0,0,0,1
-	attRot = 0,0,0,1
-	attRot0 = 0,0,0,1
-	mir = 1,1,1
-	symMethod = Radial
-	autostrutMode = Off
-	rigidAttachment = False
-	istg = 2
-	resPri = 0
-	dstg = 5
-	sidx = 0
-	sqor = 2
-	sepI = 2
-	attm = 1
-	sameVesselCollision = False
-	modCost = 0
-	modMass = 0
-	modSize = 0,0,0
-	link = solarPanelOX10L_4294145174
-	sym = radialDecoupler_4293656572
-	srfN = srfAttach,fuelTankSmallFlat_4294140434,COL1,0.00999999978|0|0,1|0|0,0.00999999978|0|0
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-		ToggleSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		SetSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		RemoveSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-	}
-	PARTDATA
-	{
-	}
-	MODULE
-	{
-		name = ModuleAnchoredDecoupler
-		isEnabled = True
-		ejectionForcePercent = 100
-		isDecoupled = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			DecoupleAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleToggleCrossfeed
-		isEnabled = True
-		crossfeedStatus = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-			EnableAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-			DisableAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleTestSubject
-		isEnabled = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleCargoPart
-		isEnabled = True
-		beingAttached = False
-		beingSettled = False
-		reinitResourcesOnStoreInVessel = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = KOSNameTag
-		isEnabled = True
-		nameTag = 
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-}
-PART
-{
-	part = solarPanelOX10L_4294145174
-	partName = Part
-	persistentId = 2204370654
-	pos = -0.356899202,22.6865044,-0.460294455
-	attPos = 0,0,0
-	attPos0 = -0.162136018,0.0246505737,0
-	rot = -7.48678413E-23,0,1.77635684E-15,1
-	attRot = 0,0,0,1
-	attRot0 = -7.48678413E-23,0,1.77635684E-15,1
-	mir = 1,1,1
-	symMethod = Radial
-	autostrutMode = Off
-	rigidAttachment = False
-	istg = 2
-	resPri = 0
-	dstg = 6
-	sidx = -1
-	sqor = -1
-	sepI = 2
-	attm = 1
-	sameVesselCollision = False
-	modCost = 0
-	modMass = 0
-	modSize = 0,0,0
-	sym = solarPanelOX10L_4293656244
-	srfN = srfAttach,radialDecoupler_4293657380,base,0|0|0,1|0|0,0|0|0
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-		ToggleSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		SetSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		RemoveSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-	}
-	PARTDATA
-	{
-	}
-	MODULE
-	{
-		name = ModuleDeployableSolarPanel
-		isEnabled = True
-		efficiencyMult = 1
-		launchUT = -1
-		currentRotation = (-0.5, 0.5, 0.5, 0.5)
-		storedAnimationTime = 0
-		storedAnimationSpeed = 1
-		deployState = RETRACTED
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			ExtendPanelsAction
-			{
-				actionGroup = None
-				active = False
-				wasActiveBeforePartWasAdjusted = False
-			}
-			ExtendAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-			RetractAction
-			{
-				actionGroup = None
-				active = False
-				wasActiveBeforePartWasAdjusted = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleCargoPart
-		isEnabled = True
-		beingAttached = False
-		beingSettled = False
-		reinitResourcesOnStoreInVessel = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = KOSNameTag
-		isEnabled = True
-		nameTag = 
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-}
-PART
-{
-	part = radialDecoupler_4293656572
-	partName = Part
-	persistentId = 1900826367
-	pos = 1.03269696,22.6618538,-0.460294574
-	attPos = 0,0,0
-	attPos0 = 0.613730073,0.057926178,-8.94069672E-08
-	rot = 0,1,0,-4.37113883E-08
-	attRot = 0,0,0,1
-	attRot0 = 0,1,0,-4.37113883E-08
-	mir = 1,1,1
-	symMethod = Radial
-	autostrutMode = Off
-	rigidAttachment = False
-	istg = 2
-	resPri = 0
-	dstg = 5
-	sidx = 0
-	sqor = 2
-	sepI = 2
-	attm = 1
-	sameVesselCollision = False
-	modCost = 0
-	modMass = 0
-	modSize = 0,0,0
-	link = solarPanelOX10L_4293656244
-	sym = radialDecoupler_4293657380
-	srfN = srfAttach,fuelTankSmallFlat_4294140434,COL1,0.00999999978|0|0,1|0|0,0.00999999978|0|0
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-		ToggleSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		SetSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		RemoveSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-	}
-	PARTDATA
-	{
-	}
-	MODULE
-	{
-		name = ModuleAnchoredDecoupler
-		isEnabled = True
-		ejectionForcePercent = 100
-		isDecoupled = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			DecoupleAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleToggleCrossfeed
-		isEnabled = True
-		crossfeedStatus = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-			EnableAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-			DisableAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleTestSubject
-		isEnabled = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleCargoPart
-		isEnabled = True
-		beingAttached = False
-		beingSettled = False
-		reinitResourcesOnStoreInVessel = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = KOSNameTag
-		isEnabled = True
-		nameTag = 
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-}
-PART
-{
-	part = solarPanelOX10L_4293656244
-	partName = Part
-	persistentId = 329951619
-	pos = 1.19483304,22.6865044,-0.460294574
-	attPos = 0,0,0
-	attPos0 = -0.162136078,0.0246505737,-1.41743861E-08
-	rot = 1.77635684E-15,1,-2.77918221E-24,-4.37113883E-08
-	attRot = 0,0,0,1
-	attRot0 = -7.48678413E-23,0,1.77635684E-15,1
-	mir = 1,1,1
-	symMethod = Radial
-	autostrutMode = Off
-	rigidAttachment = False
-	istg = 2
-	resPri = 0
-	dstg = 6
-	sidx = -1
-	sqor = -1
-	sepI = 2
-	attm = 1
-	sameVesselCollision = False
-	modCost = 0
-	modMass = 0
-	modSize = 0,0,0
-	sym = solarPanelOX10L_4294145174
-	srfN = srfAttach,radialDecoupler_4293656572,base,0|0|0,1|0|0,0|0|0
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-		ToggleSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		SetSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		RemoveSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-	}
-	PARTDATA
-	{
-	}
-	MODULE
-	{
-		name = ModuleDeployableSolarPanel
-		isEnabled = True
-		efficiencyMult = 1
-		launchUT = -1
-		currentRotation = (-0.5, 0.5, 0.5, 0.5)
-		storedAnimationTime = 0
-		storedAnimationSpeed = 1
-		deployState = RETRACTED
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			ExtendPanelsAction
-			{
-				actionGroup = None
-				active = False
-				wasActiveBeforePartWasAdjusted = False
-			}
-			ExtendAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-			RetractAction
-			{
-				actionGroup = None
-				active = False
-				wasActiveBeforePartWasAdjusted = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleCargoPart
-		isEnabled = True
-		beingAttached = False
-		beingSettled = False
-		reinitResourcesOnStoreInVessel = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = KOSNameTag
-		isEnabled = True
-		nameTag = 
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-}
-PART
-{
-	part = grus.sensor.multispectral.camera.srf.1_4293657782
-	partName = Part
-	persistentId = 1712524408
-	pos = 0.418966889,23.141798,0.151269495
-	attPos = 0,0,0
-	attPos0 = 0,-0.0746307373,0.611563981
-	rot = 0,1,0,1.54590043E-06
-	attRot = 0,0,0,1
-	attRot0 = 0,1,0,1.54590043E-06
-	mir = 1,1,1
-	symMethod = Radial
-	autostrutMode = Off
-	rigidAttachment = False
-	istg = 1
-	resPri = 0
-	dstg = 4
-	sidx = -1
-	sqor = -1
-	sepI = 1
-	attm = 1
-	sameVesselCollision = False
-	modCost = 0
-	modMass = 0
-	modSize = 0,0,0
-	srfN = srfAttach,ServiceBay.125.v2_4293955226,COL_Front,0|0|0,0|0|-1,0|0|0
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-		ToggleSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		SetSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-		RemoveSameVesselInteraction
-		{
-			actionGroup = None
-			wasActiveBeforePartWasAdjusted = False
-		}
-	}
-	PARTDATA
-	{
-	}
-	MODULE
-	{
-		name = ModuleCargoPart
-		isEnabled = True
-		beingAttached = False
-		beingSettled = False
-		reinitResourcesOnStoreInVessel = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleScienceExperiment
-		isEnabled = True
-		Deployed = False
-		Inoperable = False
-		cooldownToGo = 0
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			DeployAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-			ResetAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleScienceExperiment
-		isEnabled = True
-		Deployed = False
-		Inoperable = False
-		cooldownToGo = 0
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			DeployAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
-			ResetAction
-			{
-				actionGroup = None
-				wasActiveBeforePartWasAdjusted = False
-			}
 		}
 		UPGRADESAPPLIED
 		{

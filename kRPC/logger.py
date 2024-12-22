@@ -2,6 +2,8 @@ import json
 import time
 import datetime
 import math
+import krpc
+from krpc.services.spacecenter import Vessel
 
 DEFAULT_FILE_NAME = "kRPC/Logs/{}-{}.json"
 
@@ -30,7 +32,7 @@ def Vec3Abs(t: tuple) -> float:
     return math.sqrt(t[0] ** 2 + t[1] ** 2 + t[2] ** 2)
 
 
-def collect_data_and_log(logger: Logger, vessel):
+def collect_data_and_log(logger: Logger, vessel: Vessel):
     start = time.time()
     Sun = vessel.orbit.body.orbit.body
     Kerbin = Sun.satellites[2]
@@ -42,8 +44,9 @@ def collect_data_and_log(logger: Logger, vessel):
     ):
         pos = vessel.position(KerbinRf)
         time_since_start = time.time() - start
-        velocity = vessel.flight(vessel.orbit.body.reference_frame).velocity
+        velocity = vessel.flight(KerbinRf).velocity
         altitude = vessel.flight().mean_altitude
+        mass = vessel.mass
         # acceleration = vessel.flight().g_force
 
         data = {
@@ -51,6 +54,8 @@ def collect_data_and_log(logger: Logger, vessel):
             "time": time_since_start,
             "altitude": altitude,
             "Velocity": Vec3Abs(velocity),
+            "angle": vessel.control.pitch,
+            "mass": mass,
             # "Acceleration": acceleration,
             # "Altitude": altitude,
         }

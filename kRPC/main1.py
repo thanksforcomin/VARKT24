@@ -1,5 +1,5 @@
 import krpc
-from krpc.services.spacecenter import SASMode
+from krpc.services.spacecenter import SASMode, Vessel
 import threading
 import stageMonitor
 import toOrbit
@@ -10,10 +10,12 @@ import math
 
 from time import sleep
 
+sleep(10)
+
 
 conn = krpc.connect()
 space_center = conn.space_center
-vessel = space_center.active_vessel
+vessel: Vessel = space_center.active_vessel
 
 
 # set up the stage monitor
