@@ -60,6 +60,7 @@ periapsisStream = conn.add_stream(getattr, vessel.orbit, "periapsis_altitude")
 for engine in vessel.parts.engines:
     engine.active = True
 
+sleep(5)
 
 vessel.control.throttle = 1.0
 

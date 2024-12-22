@@ -1,1 +1,2 @@
-stage_monitor.start()
+
+import stageMonitor
