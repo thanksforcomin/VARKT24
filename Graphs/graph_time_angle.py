@@ -9,7 +9,7 @@ file_name = ""
 
 positions = []
 dots_ksp = []
-dots_math = []
+dots_math = [] 
 
 with open(file_name, "r") as file:
     for line in file:
